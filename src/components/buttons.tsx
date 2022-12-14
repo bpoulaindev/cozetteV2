@@ -72,7 +72,7 @@ export function SimpleButton({
   };
   const buttonInitialClasses = (pressed: boolean) =>
     `flex items-center px-2.5 py-1.5 border border-transparent rounded ${
-      variant !== 'text' && color ? buttonComputedClasses(pressed) : ''
+      variant !== 'text' && color && buttonComputedClasses(pressed)
     }`;
   const contentComputedClasses = (pressed: boolean) => {
     switch (color) {
