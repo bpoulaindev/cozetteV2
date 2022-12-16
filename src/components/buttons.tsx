@@ -15,7 +15,6 @@ interface SimpleButtonProps {
   color?: 'primary' | 'light' | 'dark';
   buttonPressedClasses?: string;
   contentPressedClasses?: string;
-  font?: string;
 }
 
 export function SimpleButton({
@@ -27,45 +26,44 @@ export function SimpleButton({
   variant,
   color,
   buttonPressedClasses,
-  contentPressedClasses,
-  font
+  contentPressedClasses
 }: SimpleButtonProps) {
   const buttonComputedClasses = (pressed: boolean) => {
     switch (color) {
       case 'primary':
-        return `${variant === 'contained' ? 'bg-primary-200' : 'bg-transparent'} 
-                ${variant === 'outlined' ? 'border-primary-200' : ''}
+        return `${variant === 'contained' ? 'bg-indigo-500' : 'bg-transparent'} 
+                ${variant === 'outlined' ? 'border-indigo-500' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? buttonPressedClasses ?? 'bg-primary-700' : '') ||
-                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-primary-200' : '')
+                    ? (variant === 'contained' ? buttonPressedClasses ?? 'bg-indigo-700' : '') ||
+                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-indigo-500' : '')
                     : ''
                 }`;
       case 'light':
-        return `${variant === 'contained' ? 'bg-primary-100' : 'bg-transparent'}
-                ${variant === 'outlined' ? 'border-primary-100' : ''}
+        return `${variant === 'contained' ? 'bg-indigo-100' : 'bg-transparent'}
+                ${variant === 'outlined' ? 'border-indigo-100' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? '' : buttonPressedClasses ?? 'bg-primary-300') &&
-                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-primary-100' : '')
+                    ? (variant === 'contained' ? '' : buttonPressedClasses ?? 'bg-indigo-300') &&
+                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-indigo-100' : '')
                     : ''
                 }`;
       case 'dark':
-        return `${variant === 'contained' ? 'bg-primary-300' : 'bg-transparent'}
-                ${variant === 'outlined' ? 'border-primary-300' : ''} 
+        return `${variant === 'contained' ? 'bg-indigo-300' : 'bg-transparent'}
+                ${variant === 'outlined' ? 'border-indigo-300' : ''} 
                 ${
                   pressed
-                    ? (variant === 'contained' ? '' : buttonPressedClasses ?? 'bg-primary-700') &&
-                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-primary-300' : '')
+                    ? (variant === 'contained' ? '' : buttonPressedClasses ?? 'bg-indigo-700') &&
+                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-indigo-300' : '')
                     : ''
                 }`;
       default:
-        return `${variant === 'contained' ? 'bg-primary-200' : 'bg-transparent'} 
-                ${variant === 'outlined' ? 'border-primary-200' : ''}
+        return `${variant === 'contained' ? 'bg-indigo-500' : 'bg-transparent'} 
+                ${variant === 'outlined' ? 'border-indigo-500' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? buttonPressedClasses ?? 'bg-primary-700' : '') ||
-                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-primary-200' : '')
+                    ? (variant === 'contained' ? buttonPressedClasses ?? 'bg-indigo-700' : '') ||
+                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-indigo-500' : '')
                     : ''
                 }`;
     }
@@ -77,26 +75,26 @@ export function SimpleButton({
   const contentComputedClasses = (pressed: boolean) => {
     switch (color) {
       case 'primary':
-        return `${variant === 'contained' ? 'text-white' : 'text-primary-200'}
+        return `${variant === 'contained' ? 'text-white' : 'text-indigo-500'}
                 ${
                   pressed
-                    ? (variant === 'text' ? contentPressedClasses ?? 'text-primary-700' : '') ||
+                    ? (variant === 'text' ? contentPressedClasses ?? 'text-indigo-700' : '') ||
                       (variant === 'outlined' ? contentPressedClasses ?? 'text-white' : '')
                     : ''
                 }`;
       case 'light':
-        return `${variant === 'contained' ? 'text-white' : 'text-primary-100'}
+        return `${variant === 'contained' ? 'text-white' : 'text-indigo-100'}
                 ${
                   pressed
-                    ? (variant === 'text' ? contentPressedClasses ?? 'text-primary-300' : '') ||
+                    ? (variant === 'text' ? contentPressedClasses ?? 'text-indigo-300' : '') ||
                       (variant === 'outlined' ? contentPressedClasses ?? 'text-white' : '')
                     : ''
                 }`;
       case 'dark':
-        return `${variant === 'contained' ? 'bg-primary-300' : 'bg-transparent'} 
+        return `${variant === 'contained' ? 'bg-indigo-300' : 'bg-transparent'} 
                 ${
                   pressed
-                    ? (variant === 'text' ? contentPressedClasses ?? 'text-primary-700' : '') ||
+                    ? (variant === 'text' ? contentPressedClasses ?? 'text-indigo-700' : '') ||
                       (variant === 'outlined' ? contentPressedClasses ?? 'text-white' : '')
                     : ''
                 }`;
@@ -108,9 +106,7 @@ export function SimpleButton({
       onPress={onPress}
       accessibilityLabel={accessibilityLabel}>
       {({ pressed }) => (
-        <AppText
-          style={style(color && contentComputedClasses(pressed), contentClasses)}
-          font={font}>
+        <AppText style={style(color && contentComputedClasses(pressed), contentClasses)}>
           {content}
         </AppText>
       )}
@@ -140,32 +136,32 @@ export function ComplexButton({
   const buttonComputedClasses = (pressed: boolean) => {
     switch (color) {
       case 'primary':
-        return `${variant === 'contained' ? 'bg-primary-200' : 'bg-transparent'}
-                    ${variant === 'outlined' ? 'border-primary-200' : ''}
+        return `${variant === 'contained' ? 'bg-indigo-500' : 'bg-transparent'}
+                    ${variant === 'outlined' ? 'border-indigo-500' : ''}
                     ${
                       pressed
                         ? (variant === 'contained'
-                            ? buttonPressedClasses || 'bg-primary-700'
+                            ? buttonPressedClasses || 'bg-indigo-700'
                             : '') ||
-                          (variant === 'outlined' ? buttonPressedClasses || 'bg-primary-200' : '')
+                          (variant === 'outlined' ? buttonPressedClasses || 'bg-indigo-500' : '')
                         : ''
                     }`;
       case 'light':
-        return `${variant === 'contained' ? 'bg-primary-100' : 'bg-transparent'}
-                ${variant === 'outlined' ? 'border-primary-100' : ''}
+        return `${variant === 'contained' ? 'bg-indigo-100' : 'bg-transparent'}
+                ${variant === 'outlined' ? 'border-indigo-100' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? '' : buttonPressedClasses || 'bg-primary-300') &&
-                      (variant === 'outlined' ? buttonPressedClasses || 'bg-primary-100' : '')
+                    ? (variant === 'contained' ? '' : buttonPressedClasses || 'bg-indigo-300') &&
+                      (variant === 'outlined' ? buttonPressedClasses || 'bg-indigo-100' : '')
                     : ''
                 }`;
       case 'dark':
-        return `${variant === 'contained' ? 'bg-primary-300' : 'bg-transparent'}
-                ${variant === 'outlined' ? 'border-primary-300' : ''}
+        return `${variant === 'contained' ? 'bg-indigo-300' : 'bg-transparent'}
+                ${variant === 'outlined' ? 'border-indigo-300' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? '' : buttonPressedClasses || 'bg-primary-700') &&
-                      (variant === 'outlined' ? buttonPressedClasses || 'bg-primary-300' : '')
+                    ? (variant === 'contained' ? '' : buttonPressedClasses || 'bg-indigo-700') &&
+                      (variant === 'outlined' ? buttonPressedClasses || 'bg-indigo-300' : '')
                     : ''
                 }`;
     }

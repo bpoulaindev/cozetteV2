@@ -3,12 +3,10 @@ import { View, Image, TextInput } from 'react-native';
 import { ComplexButton, SimpleButton } from '../../components/buttons';
 import { AppText } from '../../components/appText';
 import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
-import { useNavigate } from 'react-router-native';
 import tw from 'twrnc';
 
 const { style } = tw;
 export const Register = () => {
-  const navigate = useNavigate();
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordHidden, setPasswordHidden] = useState<boolean>(true);
@@ -18,9 +16,7 @@ export const Register = () => {
   return (
     <View
       style={style('flex flex-col h-full items-center justify-between z-50 w-full bg-light-100')}>
-      <View
-        style={style('flex w-full justify-center items-center pb-8')}
-        onLayout={(event) => setViewHeight(event.nativeEvent.layout.height)}>
+      <View style={style('flex w-full justify-center items-center pb-8')}>
         <Image
           style={style('mt-2 lg:mt-10 xl:mt-16 w-[150px]')}
           resizeMode='contain'
@@ -51,7 +47,7 @@ export const Register = () => {
             <AppText style={style('text-sm lg:text-base')} font='Lato'>
               Votre date de naissance
             </AppText>
-            <ComplexButton variant='text' onPress={() => setOpen(true)}>
+            <ComplexButton variant='text'>
               <AppText font='Lato'>Teeest</AppText>
             </ComplexButton>
             <View style={style('w-full rounded-md mt-1/2 md:mt-2 bg-white w-full')}>
@@ -104,7 +100,6 @@ export const Register = () => {
             buttonClasses='mt-3 md:mt-5 lg:mt-10'
             contentClasses='text-sm lg:text-base p-1 lg:p-2'
             font='LatoBold'
-            onPress={register}
           />
           <View style={style('flex flex-row items-center justify-center')}>
             <AppText style={style('text-sm lg:text-base')}>Déjà un compte ?</AppText>
@@ -115,7 +110,6 @@ export const Register = () => {
               contentClasses='text-sm lg:text-base'
               font='LatoBold'
               buttonClasses='px-1'
-              onPress={navigateToLogin}
             />
           </View>
         </View>
