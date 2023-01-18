@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Image, TextInput } from 'react-native';
-import { ComplexButton, SimpleButton } from '../../components/buttons';
+import { SimpleButton } from '../../components/buttons';
 import { AppText } from '../../components/appText';
-import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import tw from 'twrnc';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebaseConfig';
+import { createUser } from '../../actions/users';
+import firebase from 'firebase/compat';
+import User = firebase.User;
 
 const { style } = tw;
 export const Register = () => {
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [passwordHidden, setPasswordHidden] = useState<boolean>(true);
-  const [birthDate, setBirthDate] = useState<string>('');
-  console.log(mail, password, birthDate);
+  const postUser = useCallback(() => {
+    console.log('sending request', mail, password);
+    //const auth = getAuth();
+    createUserWithEmailAndPassword(auth, mail, password)
+      .then((userCredential) => {
+        return createUser(userCredential.user as User);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
+  }, [mail, password]);
 
   return (
-    <View
-      style={style('flex flex-col h-full items-center justify-between z-50 w-full bg-light-100')}>
+    <View style={style('flex flex-col h-full items-center justify-between z-50 w-full bg-white')}>
       <View style={style('flex w-full justify-center items-center pb-8')}>
         <Image
-          style={style('mt-2 lg:mt-10 xl:mt-16 w-[150px]')}
+          style={style('mt-16 w-[150px]')}
           resizeMode='contain'
           source={require('../../../assets/Cozette.png')}
         />
@@ -30,88 +44,36 @@ export const Register = () => {
           Bienvenue chez Cozette, {'\n'} Lille, vue par les lillois
         </AppText>
         <View style={style('mt-5 lg:mt-10 max-w-[80%] w-full flex flex-col')}>
+          <AppText style={style('my-2 text-gray-700')}>Adresse mail</AppText>
           <View style={style('w-full')}>
-            <AppText style={style('text-sm lg:text-base')} font='Lato'>
-              Votre adresse mail
-            </AppText>
-            <View style={style('w-full rounded-md mt-1/2 md:mt-2 bg-white w-full')}>
-              <TextInput
-                style={style('py-1 md:py-2 px-3 lg:py-4 lg:px-6 text-sm lg:text-base leading-5')}
-                value={mail}
-                placeholder='lillois@gmail.com'
-                onChangeText={(text) => setMail(text)}
-              />
-            </View>
-          </View>
-          <View style={style('w-full mt-3 md:mt-5')}>
-            <AppText style={style('text-sm lg:text-base')} font='Lato'>
-              Votre date de naissance
-            </AppText>
-            <ComplexButton variant='text'>
-              <AppText font='Lato'>Teeest</AppText>
-            </ComplexButton>
-            <View style={style('w-full rounded-md mt-1/2 md:mt-2 bg-white w-full')}>
-              <TextInput
-                style={style('py-1 md:py-2 px-3 lg:py-4 lg:px-6 text-sm lg:text-base leading-5')}
-                value={birthDate}
-                placeholder='JJ/MM/AAAA'
-                onChangeText={(text) => setBirthDate(text)}
-              />
-            </View>
-          </View>
-          <View style={style('mt-3 md:mt-5 w-full')}>
-            <AppText style={style('text-sm lg:text-base')} font='Lato'>
-              Votre mot de passe
-            </AppText>
-            <View style={style('w-full rounded-md mt-1/2 md:mt-2 bg-white w-full relative')}>
-              <TextInput
-                style={style('py-1 md:py-2 px-3 lg:py-4 lg:px-6 text-sm lg:text-base leading-5')}
-                value={password}
-                secureTextEntry={passwordHidden}
-                placeholder='Evitez azerty1234'
-                onChangeText={(text) => setPassword(text)}
-              />
-              <View
-                style={style(
-                  'pointer-events-none absolute inset-y-1.5 lg:inset-y-2.5 right-0 flex items-center pr-1.5 lg:pr-3'
-                )}>
-                {passwordHidden ? (
-                  <ComplexButton
-                    variant='text'
-                    buttonClasses='-mt-1 lg:mt-0'
-                    onPress={() => setPasswordHidden(false)}>
-                    <EyeIcon color='#FF9270' size={20} />
-                  </ComplexButton>
-                ) : (
-                  <ComplexButton
-                    variant='text'
-                    buttonClasses='-mt-1 lg:mt-0'
-                    onPress={() => setPasswordHidden(true)}>
-                    <EyeSlashIcon color='#FF9270' size={20} />
-                  </ComplexButton>
-                )}
-              </View>
-            </View>
-          </View>
-          <SimpleButton
-            content="S'inscrire"
-            variant='contained'
-            color='primary'
-            buttonClasses='mt-3 md:mt-5 lg:mt-10'
-            contentClasses='text-sm lg:text-base p-1 lg:p-2'
-            font='LatoBold'
-          />
-          <View style={style('flex flex-row items-center justify-center')}>
-            <AppText style={style('text-sm lg:text-base')}>Déjà un compte ?</AppText>
-            <SimpleButton
-              content='Connectez-vous ici'
-              variant='text'
-              color='primary'
-              contentClasses='text-sm lg:text-base'
-              font='LatoBold'
-              buttonClasses='px-1'
+            <TextInput
+              style={style(
+                'w-full flex items-center py-3 px-4 bg-white border-[.5px] border-gray-200 [&>*]:text-gray-700 rounded-lg'
+              )}
+              value={mail}
+              onChangeText={(e: string) => setMail(e)}
+              placeholder='Votre adresse mail'
             />
           </View>
+          <AppText style={style('mb-2 mt-8 text-gray-700')}>Mot de passe</AppText>
+          <View style={style('w-full')}>
+            <TextInput
+              style={style(
+                'w-full flex items-center py-3 px-4 bg-white border-[.5px] border-gray-200 [&>*]:text-gray-700 rounded-lg'
+              )}
+              value={password}
+              onChangeText={(e: string) => setPassword(e)}
+              placeholder='Votre mot de passe'
+              secureTextEntry
+            />
+          </View>
+          <SimpleButton
+            content='Créer un compte'
+            variant='contained'
+            color='primary'
+            buttonClasses='rounded-lg py-2 mt-8'
+            onPress={postUser}
+          />
         </View>
       </View>
     </View>

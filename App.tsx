@@ -1,38 +1,35 @@
+import { NativeRouter, Route } from 'react-router-native';
+import { Homepage } from './src/screens/homepage/homepage';
+import { Maps } from './src/screens/maps/maps';
+import { Navbar } from './src/components/navbar';
+import { Navigate, Routes } from 'react-router-dom';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { useEffect, useState } from 'react';
-import { SimpleButton } from './src/components/buttons';
-import { AppText } from './src/components/appText';
-import tw from 'twrnc';
-
-const { style } = tw;
+import { AuthContext, AuthProvider } from './src/screens/auth/auth_context';
+import { useContext } from 'react';
+import { Login } from './src/screens/auth/login';
+// @ts-ignore
+import { API_KEY } from '@env';
 
 export default function App() {
-  const [count, setCount] = useState<string[]>(['Wesh alors']);
-  const addWeshAlors = () => {
-    setCount([...count, 'Wesh alors']);
-  };
+  const { isLoggedIn, login, logout } = useContext(AuthContext);
+  console.log('lesgo', API_KEY);
   return (
-    <View style={style('flex justify-center mt-20 px-8')}>
-      <SimpleButton
-        content='Ajouter un wesh alors'
-        variant='contained'
-        color='primary'
-        onPress={addWeshAlors}
-        buttonClasses={'rounded-lg py-2'}
-      />
-      <View style={style('flex flex-wrap flex-row justify-center items-center w-full mt-4')}>
-        {count.map((weshAlors, index) => (
-          <View style={style('rounded-lg items-center bg-indigo-100 m-2')} key={index}>
-            <AppText
-              style={style('text-indigo-800 px-3 py-2 rounded-lg font-medium flex items-center')}
-              key={index}>
-              Wesh alors
-            </AppText>
-          </View>
-        ))}
-      </View>
-      <StatusBar hidden />
-    </View>
+    // @ts-ignore
+    <AuthProvider>
+      <NativeRouter>
+        <Routes>
+          <Route path='/' element={isLoggedIn ? <Homepage /> : <Navigate to='/login' />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Homepage />} />
+          {isLoggedIn && (
+            <>
+              <Route path='/maps' element={<Maps />} />
+            </>
+          )}
+        </Routes>
+        <Navbar />
+        <StatusBar hidden />
+      </NativeRouter>
+    </AuthProvider>
   );
 }

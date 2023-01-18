@@ -11,6 +11,6 @@
     <key>EXUpdatesURL</key>
     <string>https://u.expo.dev/ee8b8e38-40df-48f4-9448-5d352d5eba33</string>
     <key>EXUpdatesRuntimeVersion</key>
-    <string>1.0.0</string>
+    <string>exposdk:47.0.0</string>
   </dict>
 </plist>

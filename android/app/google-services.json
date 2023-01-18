@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1029132809433",
+    "firebase_url": "https://cozette-18b07-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "cozette-18b07",
+    "storage_bucket": "cozette-18b07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029132809433:android:bbde72b05071429a6d3ac8",
+        "android_client_info": {
+          "package_name": "com.cozette"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029132809433-lhjp90ggvolpsn4hnr8i8c7epeu2d8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLZ0d6BhKeTW8BKNHuQr8LBr1kV_3ANO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029132809433-lhjp90ggvolpsn4hnr8i8c7epeu2d8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

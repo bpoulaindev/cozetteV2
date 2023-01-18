@@ -69,4 +69,6 @@ ios/certs/*
 web-build/
 dist/
 
+.env
+credentials.json
 # @end expo-cli
