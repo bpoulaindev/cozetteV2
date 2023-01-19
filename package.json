@@ -20,6 +20,7 @@
   "dependencies": {
     "@expo/webpack-config": "^0.17.2",
     "@googlemaps/polyline-codec": "^1.0.28",
+    "eas-cli": "^3.3.2",
     "expo": "~47.0.8",
     "expo-build-properties": "~0.4.1",
     "expo-constants": "~14.0.2",
@@ -31,8 +32,10 @@
     "expo-status-bar": "~1.4.2",
     "expo-updates": "^0.15.6",
     "firebase": "^9.15.0",
+    "i18next": "^22.4.9",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-i18next": "^12.1.4",
     "react-native": "0.70.5",
     "react-native-google-places-autocomplete": "^2.5.1",
     "react-native-heroicons": "^3.2.0",

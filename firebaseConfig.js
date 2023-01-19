@@ -21,7 +21,6 @@ import {
 } from '@env';
 let app;
 
-console.log('vasy gros', API_KEY);
 export const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
@@ -33,7 +32,9 @@ export const firebaseConfig = {
   measurementId: MEASUREMENT_ID
 };
 
-if (firebase.apps.length === 0) {
+
+  if (firebase.apps.length === 0) {
+  console.log('initial config', firebaseConfig)
   app = firebase.initializeApp(firebaseConfig);
 } else {
   app = firebase.app();

@@ -23,6 +23,7 @@ export const Login = () => {
     //const auth = getAuth();
     createUserWithEmailAndPassword(auth, mail, password)
       .then((userCredential) => {
+        console.log('this is the new user', userCredential.user)
         return createUser(userCredential.user as User);
       })
       .catch((error) => {
@@ -109,7 +110,6 @@ export const Login = () => {
                 'w-full flex items-center py-3 px-4 bg-white border-[.5px] border-gray-200 [&>*]:text-gray-700 rounded-lg'
               )}
               placeholder='+1 999 999 9999'
-              autoFocus
               keyboardType='phone-pad'
               textContentType='telephoneNumber'
               onChangeText={setPhoneNumber}
