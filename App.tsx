@@ -9,10 +9,10 @@ import { useContext } from 'react';
 import { Login } from './src/screens/auth/login';
 // @ts-ignore
 import { API_KEY } from '@env';
+import './i18n.config';
 
 export default function App() {
   const { isLoggedIn, login, logout } = useContext(AuthContext);
-  console.log('lesgo', API_KEY);
   return (
     // @ts-ignore
     <AuthProvider>

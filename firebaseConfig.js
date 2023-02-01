@@ -21,7 +21,6 @@ import {
 } from '@env';
 let app;
 
-console.log('vasy gros', API_KEY);
 export const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,

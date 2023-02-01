@@ -13,9 +13,11 @@ import { createUser } from '../../actions/users';
 import firebase from 'firebase/compat';
 import User = firebase.User;
 import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
+import { useTranslation } from 'react-i18next';
 
 const { style } = tw;
 export const Login = () => {
+  const { t } = useTranslation();
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const postUser = useCallback(() => {
@@ -65,7 +67,7 @@ export const Login = () => {
             'text-xl md:text-2xl pt-1 lg:text-2.5xl font-normal text-center -mt-2 lg:mt-4 xl:mt-8'
           )}
           font='SuperiorBold'>
-          Bienvenue chez Cozette, {'\n'} Lille, vue par les lillois
+          {t('Login.welcome')}
         </AppText>
         <View style={style('mt-5 lg:mt-10 max-w-[80%] w-full flex flex-col')}>
           <AppText style={style('my-2 text-gray-700')}>Adresse mail</AppText>
@@ -108,7 +110,7 @@ export const Login = () => {
               style={style(
                 'w-full flex items-center py-3 px-4 bg-white border-[.5px] border-gray-200 [&>*]:text-gray-700 rounded-lg'
               )}
-              placeholder='+1 999 999 9999'
+              placeholder='+33 99 99 99 99'
               autoFocus
               keyboardType='phone-pad'
               textContentType='telephoneNumber'
