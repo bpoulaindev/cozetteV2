@@ -1,3 +1,11 @@
 {
-  "Login.welcome": "Bienvenue chez Cozette, {'\\n'} Lille, vue par les lillois"
+  "Register.welcome": "Bienvenue chez Cozette, \n Lille, vue par les lillois",
+  "Register.mail.title": "Adresse mail",
+  "Register.mail.placeholder": "Votre adresse mail",
+  "Register.password.title": "Mot de passe",
+  "Register.password.placeholder": "Votre mot de passe",
+  "Register.continue": "Continuer",
+  "Register.phone.title": "Numéro de téléphone",
+  "Register.phone.confirm": "Confirmer mon numéro",
+  "Register.phone.confirm.button": "Confirmer"
 }

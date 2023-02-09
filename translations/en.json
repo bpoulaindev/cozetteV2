@@ -1,3 +1,11 @@
 {
-  "Login.welcome": "Welcome to Cozette, {'\\n'} Lille, seen by the eyes of the local"
+  "Register.welcome": "Welcome to Cozette, \n Lille, seen by the eyes of the local",
+  "Register.mail.title": "Mail address",
+  "Register.mail.placeholder": "Your mail address",
+  "Register.password.title": "Password",
+  "Register.password.placeholder": "Your password",
+  "Register.continue": "Continue",
+  "Register.phone.title": "Phone number",
+  "Register.phone.confirm": "Confirm verification code",
+  "Register.phone.confirm.button": "Confirm"
 }
