@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { View, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Image, TextInput } from 'react-native';
 import { SimpleButton } from '../../components/buttons';
 import { AppText } from '../../components/appText';
 import tw from 'twrnc';
@@ -58,6 +58,7 @@ export const Register = () => {
       setMessage(`Error: ${err.message}`);
     }
   };
+  const [testPhone, setTestPhone] = useState<string>('');
   return (
     <View style={style('flex flex-col h-full items-center justify-between z-50 w-full bg-white')}>
       <View style={style('flex w-full justify-center items-center pb-8')}>
