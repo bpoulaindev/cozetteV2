@@ -30,7 +30,7 @@ export default function App() {
           )}
         </Routes>
         <Navbar />
-        <StatusBar hidden />
+        {/*<StatusBar hidden />*/}
       </NativeRouter>
     </AuthProvider>
   );

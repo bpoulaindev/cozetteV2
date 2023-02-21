@@ -7,5 +7,11 @@
   "Register.continue": "Continue",
   "Register.phone.title": "Phone number",
   "Register.phone.confirm": "Confirm verification code",
-  "Register.phone.confirm.button": "Confirm"
+  "Register.phone.confirm.button": "Confirm",
+  "Onboarding.title.1": "Discover the city of Lille with Cozette",
+  "Onboarding.title.2": "Create journeys according to your tastes",
+  "Onboarding.title.3": "Don't waste any more time searching",
+  "Onboarding.description.1": "Cozette allows you to discover your city in a simple and original way.",
+  "Onboarding.description.2": "Discover the city from another angle according to your needs and desires.",
+  "Onboarding.description.3": "No more searching on the internet. Everything is here!"
 }
