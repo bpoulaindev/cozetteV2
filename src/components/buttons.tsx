@@ -35,8 +35,8 @@ export function SimpleButton({
                 ${variant === 'outlined' ? 'border-indigo-500' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? buttonPressedClasses ?? 'bg-indigo-700' : '') ||
-                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-indigo-500' : '')
+                    ? (variant === 'contained' ? (buttonPressedClasses ?? 'bg-indigo-700') : '') ||
+                      (variant === 'outlined' ? (buttonPressedClasses ?? 'bg-indigo-500') : '')
                     : ''
                 }`;
       case 'light':
@@ -44,8 +44,8 @@ export function SimpleButton({
                 ${variant === 'outlined' ? 'border-indigo-100' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? '' : buttonPressedClasses ?? 'bg-indigo-300') &&
-                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-indigo-100' : '')
+                    ? (variant === 'contained' ? '' : (buttonPressedClasses ?? 'bg-indigo-300')) &&
+                      (variant === 'outlined' ? (buttonPressedClasses ?? 'bg-indigo-100') : '')
                     : ''
                 }`;
       case 'dark':
@@ -53,8 +53,8 @@ export function SimpleButton({
                 ${variant === 'outlined' ? 'border-indigo-300' : ''} 
                 ${
                   pressed
-                    ? (variant === 'contained' ? '' : buttonPressedClasses ?? 'bg-indigo-700') &&
-                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-indigo-300' : '')
+                    ? (variant === 'contained' ? '' : (buttonPressedClasses ?? 'bg-indigo-700')) &&
+                      (variant === 'outlined' ? (buttonPressedClasses ?? 'bg-indigo-300') : '')
                     : ''
                 }`;
       default:
@@ -62,15 +62,15 @@ export function SimpleButton({
                 ${variant === 'outlined' ? 'border-indigo-500' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? buttonPressedClasses ?? 'bg-indigo-700' : '') ||
-                      (variant === 'outlined' ? buttonPressedClasses ?? 'bg-indigo-500' : '')
+                    ? (variant === 'contained' ? (buttonPressedClasses ?? 'bg-indigo-700') : '') ||
+                      (variant === 'outlined' ? (buttonPressedClasses ?? 'bg-indigo-500') : '')
                     : ''
                 }`;
     }
   };
   const buttonInitialClasses = (pressed: boolean) =>
     `flex items-center px-2.5 py-1.5 border border-transparent rounded ${
-      variant !== 'text' && color && buttonComputedClasses(pressed)
+        (variant !== 'text' && color) ? buttonComputedClasses(pressed) : ''
     }`;
   const contentComputedClasses = (pressed: boolean) => {
     switch (color) {
@@ -78,24 +78,24 @@ export function SimpleButton({
         return `${variant === 'contained' ? 'text-white' : 'text-indigo-500'}
                 ${
                   pressed
-                    ? (variant === 'text' ? contentPressedClasses ?? 'text-indigo-700' : '') ||
-                      (variant === 'outlined' ? contentPressedClasses ?? 'text-white' : '')
+                    ? (variant === 'text' ? (contentPressedClasses ?? 'text-indigo-700') : '') ||
+                      (variant === 'outlined' ? (contentPressedClasses ?? 'text-white') : '')
                     : ''
                 }`;
       case 'light':
         return `${variant === 'contained' ? 'text-white' : 'text-indigo-100'}
                 ${
                   pressed
-                    ? (variant === 'text' ? contentPressedClasses ?? 'text-indigo-300' : '') ||
-                      (variant === 'outlined' ? contentPressedClasses ?? 'text-white' : '')
+                    ? (variant === 'text' ? (contentPressedClasses ?? 'text-indigo-300') : '') ||
+                      (variant === 'outlined' ? (contentPressedClasses ?? 'text-white') : '')
                     : ''
                 }`;
       case 'dark':
         return `${variant === 'contained' ? 'bg-indigo-300' : 'bg-transparent'} 
                 ${
                   pressed
-                    ? (variant === 'text' ? contentPressedClasses ?? 'text-indigo-700' : '') ||
-                      (variant === 'outlined' ? contentPressedClasses ?? 'text-white' : '')
+                    ? (variant === 'text' ? (contentPressedClasses ?? 'text-indigo-700') : '') ||
+                      (variant === 'outlined' ? (contentPressedClasses ?? 'text-white') : '')
                     : ''
                 }`;
     }
@@ -106,7 +106,7 @@ export function SimpleButton({
       onPress={onPress}
       accessibilityLabel={accessibilityLabel}>
       {({ pressed }) => (
-        <AppText style={style(color && contentComputedClasses(pressed), contentClasses)}>
+        <AppText style={style(color ? contentComputedClasses(pressed) : '', contentClasses)}>
           {content}
         </AppText>
       )}
@@ -141,9 +141,9 @@ export function ComplexButton({
                     ${
                       pressed
                         ? (variant === 'contained'
-                            ? buttonPressedClasses || 'bg-indigo-700'
+                            ? (buttonPressedClasses || 'bg-indigo-700')
                             : '') ||
-                          (variant === 'outlined' ? buttonPressedClasses || 'bg-indigo-500' : '')
+                          (variant === 'outlined' ? (buttonPressedClasses || 'bg-indigo-500') : '')
                         : ''
                     }`;
       case 'light':
@@ -151,8 +151,8 @@ export function ComplexButton({
                 ${variant === 'outlined' ? 'border-indigo-100' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? '' : buttonPressedClasses || 'bg-indigo-300') &&
-                      (variant === 'outlined' ? buttonPressedClasses || 'bg-indigo-100' : '')
+                    ? (variant === 'contained' ? '' : (buttonPressedClasses || 'bg-indigo-300')) &&
+                      (variant === 'outlined' ? (buttonPressedClasses || 'bg-indigo-100') : '')
                     : ''
                 }`;
       case 'dark':
@@ -160,15 +160,15 @@ export function ComplexButton({
                 ${variant === 'outlined' ? 'border-indigo-300' : ''}
                 ${
                   pressed
-                    ? (variant === 'contained' ? '' : buttonPressedClasses || 'bg-indigo-700') &&
-                      (variant === 'outlined' ? buttonPressedClasses || 'bg-indigo-300' : '')
+                    ? (variant === 'contained' ? '' : (buttonPressedClasses || 'bg-indigo-700')) &&
+                      (variant === 'outlined' ? (buttonPressedClasses || 'bg-indigo-300') : '')
                     : ''
                 }`;
     }
   };
   const buttonInitialClasses = (pressed: boolean) =>
     `flex items-center px-2.5 py-1.5 border border-transparent rounded ${
-      variant !== 'text' && color && buttonComputedClasses(pressed)
+        (variant !== 'text' && color) ? buttonComputedClasses(pressed) : ''
     }`;
   return (
     <Pressable

@@ -12,7 +12,7 @@ export const Navbar = () => {
     navigate(path);
   };
   const location = useLocation();
-  const bannedLocations = ['/', '/login', '/signup'];
+  const bannedLocations = ['/', '/login', '/register', '/onboarding'];
   const isHome = useMemo(() => location.pathname === '/home', [location.pathname]);
   const isMap = useMemo(() => location.pathname === '/map', [location.pathname]);
   const isChat = useMemo(() => location.pathname === '/chat', [location.pathname]);

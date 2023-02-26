@@ -6,10 +6,11 @@ import { Navigate, Routes } from 'react-router-dom';
 import { StatusBar } from 'expo-status-bar';
 import { AuthContext, AuthProvider } from './src/screens/auth/auth_context';
 import { useContext } from 'react';
-import { Login } from './src/screens/auth/login';
+import { Register } from './src/screens/auth/register';
 // @ts-ignore
 import { API_KEY } from '@env';
 import './i18n.config';
+import {Onboarding} from "./src/screens/onboarding/onboarding";
 
 export default function App() {
   const { isLoggedIn, login, logout } = useContext(AuthContext);
@@ -18,9 +19,10 @@ export default function App() {
     <AuthProvider>
       <NativeRouter>
         <Routes>
-          <Route path='/' element={isLoggedIn ? <Homepage /> : <Navigate to='/login' />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Homepage />} />
+          <Route path='/' element={isLoggedIn ? <Homepage /> : <Navigate to='/onboarding' />} />
+          <Route path='/onboarding' element={<Onboarding />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Homepage />} />
           {isLoggedIn && (
             <>
               <Route path='/maps' element={<Maps />} />
@@ -28,7 +30,7 @@ export default function App() {
           )}
         </Routes>
         <Navbar />
-        <StatusBar hidden />
+        {/*<StatusBar hidden />*/}
       </NativeRouter>
     </AuthProvider>
   );
