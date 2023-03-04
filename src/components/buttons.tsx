@@ -1,181 +1,92 @@
 import React, { ReactElement } from 'react';
 import { Pressable } from 'react-native';
-import tw from 'twrnc';
+
 import { AppText } from './appText';
+import { Audio } from 'expo-av';
+import tw from '../../lib/tailwind';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const waterSound = require('../../assets/WaterDropHomemade.m4a');
 
 const { style } = tw;
 
-interface SimpleButtonProps {
+interface ButtonProps {
   buttonClasses?: string;
   onPress?: () => void;
   accessibilityLabel?: string;
   contentClasses?: string;
-  content: string;
+  content?: string;
   variant: 'text' | 'contained' | 'outlined';
-  color?: 'primary' | 'light' | 'dark';
+  color?: 'primary' | 'secondary' | 'tertiary' | 'gray';
   buttonPressedClasses?: string;
   contentPressedClasses?: string;
+  children?: ReactElement;
+  disabled?: boolean;
 }
 
-export function SimpleButton({
-  buttonClasses,
+export function Button({
+  buttonClasses = '',
   onPress,
   accessibilityLabel,
-  contentClasses,
+  contentClasses = '',
   content,
-  variant,
-  color,
-  buttonPressedClasses,
-  contentPressedClasses
-}: SimpleButtonProps) {
-  const buttonComputedClasses = (pressed: boolean) => {
-    switch (color) {
-      case 'primary':
-        return `${variant === 'contained' ? 'bg-indigo-500' : 'bg-transparent'} 
-                ${variant === 'outlined' ? 'border-indigo-500' : ''}
-                ${
-                  pressed
-                    ? (variant === 'contained' ? (buttonPressedClasses ?? 'bg-indigo-700') : '') ||
-                      (variant === 'outlined' ? (buttonPressedClasses ?? 'bg-indigo-500') : '')
-                    : ''
-                }`;
-      case 'light':
-        return `${variant === 'contained' ? 'bg-indigo-100' : 'bg-transparent'}
-                ${variant === 'outlined' ? 'border-indigo-100' : ''}
-                ${
-                  pressed
-                    ? (variant === 'contained' ? '' : (buttonPressedClasses ?? 'bg-indigo-300')) &&
-                      (variant === 'outlined' ? (buttonPressedClasses ?? 'bg-indigo-100') : '')
-                    : ''
-                }`;
-      case 'dark':
-        return `${variant === 'contained' ? 'bg-indigo-300' : 'bg-transparent'}
-                ${variant === 'outlined' ? 'border-indigo-300' : ''} 
-                ${
-                  pressed
-                    ? (variant === 'contained' ? '' : (buttonPressedClasses ?? 'bg-indigo-700')) &&
-                      (variant === 'outlined' ? (buttonPressedClasses ?? 'bg-indigo-300') : '')
-                    : ''
-                }`;
-      default:
-        return `${variant === 'contained' ? 'bg-indigo-500' : 'bg-transparent'} 
-                ${variant === 'outlined' ? 'border-indigo-500' : ''}
-                ${
-                  pressed
-                    ? (variant === 'contained' ? (buttonPressedClasses ?? 'bg-indigo-700') : '') ||
-                      (variant === 'outlined' ? (buttonPressedClasses ?? 'bg-indigo-500') : '')
-                    : ''
-                }`;
-    }
-  };
-  const buttonInitialClasses = (pressed: boolean) =>
-    `flex items-center px-2.5 py-1.5 border border-transparent rounded ${
-        (variant !== 'text' && color) ? buttonComputedClasses(pressed) : ''
-    }`;
-  const contentComputedClasses = (pressed: boolean) => {
-    switch (color) {
-      case 'primary':
-        return `${variant === 'contained' ? 'text-white' : 'text-indigo-500'}
-                ${
-                  pressed
-                    ? (variant === 'text' ? (contentPressedClasses ?? 'text-indigo-700') : '') ||
-                      (variant === 'outlined' ? (contentPressedClasses ?? 'text-white') : '')
-                    : ''
-                }`;
-      case 'light':
-        return `${variant === 'contained' ? 'text-white' : 'text-indigo-100'}
-                ${
-                  pressed
-                    ? (variant === 'text' ? (contentPressedClasses ?? 'text-indigo-300') : '') ||
-                      (variant === 'outlined' ? (contentPressedClasses ?? 'text-white') : '')
-                    : ''
-                }`;
-      case 'dark':
-        return `${variant === 'contained' ? 'bg-indigo-300' : 'bg-transparent'} 
-                ${
-                  pressed
-                    ? (variant === 'text' ? (contentPressedClasses ?? 'text-indigo-700') : '') ||
-                      (variant === 'outlined' ? (contentPressedClasses ?? 'text-white') : '')
-                    : ''
-                }`;
-    }
-  };
-  return (
-    <Pressable
-      style={({ pressed }) => style(buttonInitialClasses(pressed), buttonClasses)}
-      onPress={onPress}
-      accessibilityLabel={accessibilityLabel}>
-      {({ pressed }) => (
-        <AppText style={style(color ? contentComputedClasses(pressed) : '', contentClasses)}>
-          {content}
-        </AppText>
-      )}
-    </Pressable>
-  );
-}
-
-interface ComplexButtonProps {
-  buttonClasses?: string;
-  accessibilityLabel?: string;
-  variant: 'text' | 'contained' | 'outlined';
-  color?: 'primary' | 'light' | 'dark';
-  buttonPressedClasses?: string;
-  children: ReactElement;
-  onPress?: () => void;
-}
-
-export function ComplexButton({
-  buttonClasses,
-  accessibilityLabel,
-  variant,
-  color,
-  buttonPressedClasses,
+  variant = 'contained',
+  color = 'primary',
+  buttonPressedClasses = '',
+  contentPressedClasses = '',
   children,
-  onPress
-}: ComplexButtonProps) {
+  disabled = false
+}: ButtonProps) {
   const buttonComputedClasses = (pressed: boolean) => {
-    switch (color) {
-      case 'primary':
-        return `${variant === 'contained' ? 'bg-indigo-500' : 'bg-transparent'}
-                    ${variant === 'outlined' ? 'border-indigo-500' : ''}
-                    ${
-                      pressed
-                        ? (variant === 'contained'
-                            ? (buttonPressedClasses || 'bg-indigo-700')
-                            : '') ||
-                          (variant === 'outlined' ? (buttonPressedClasses || 'bg-indigo-500') : '')
-                        : ''
-                    }`;
-      case 'light':
-        return `${variant === 'contained' ? 'bg-indigo-100' : 'bg-transparent'}
-                ${variant === 'outlined' ? 'border-indigo-100' : ''}
-                ${
-                  pressed
-                    ? (variant === 'contained' ? '' : (buttonPressedClasses || 'bg-indigo-300')) &&
-                      (variant === 'outlined' ? (buttonPressedClasses || 'bg-indigo-100') : '')
-                    : ''
-                }`;
-      case 'dark':
-        return `${variant === 'contained' ? 'bg-indigo-300' : 'bg-transparent'}
-                ${variant === 'outlined' ? 'border-indigo-300' : ''}
-                ${
-                  pressed
-                    ? (variant === 'contained' ? '' : (buttonPressedClasses || 'bg-indigo-700')) &&
-                      (variant === 'outlined' ? (buttonPressedClasses || 'bg-indigo-300') : '')
-                    : ''
-                }`;
+    const basicClasses = `flex items-center px-2.5 py-1.5 border border-transparent rounded-xl ${buttonClasses}`;
+    switch (variant) {
+      case 'contained': {
+        return `${basicClasses} text-white ${
+          pressed ? `bg-${color}-400 ${buttonPressedClasses}` : `bg-${color}-300`
+        }`;
+      }
+      case 'outlined': {
+        return `${basicClasses} text-${color}-300 border-${color}-300 ${
+          pressed ? `bg-${color}-100 ${buttonPressedClasses}` : `bg-transparent`
+        }`;
+      }
+      case 'text': {
+        return `${basicClasses} bg-transparent ${
+          pressed ? `text-${color}-400 ${buttonPressedClasses} ` : `text-${color}-300`
+        }`;
+      }
     }
   };
-  const buttonInitialClasses = (pressed: boolean) =>
-    `flex items-center px-2.5 py-1.5 border border-transparent rounded ${
-        (variant !== 'text' && color) ? buttonComputedClasses(pressed) : ''
-    }`;
+  const contentComputedClasses = (pressed: boolean) => {
+    const basicClasses = `text-center ${contentClasses}`;
+    switch (variant) {
+      case 'contained':
+        return `${basicClasses} text-white ${
+          pressed ? `text-${color}-400 ${contentPressedClasses}` : ''
+        }`;
+      case 'outlined':
+        return `${basicClasses} ${
+          pressed ? `text-${color}-400 ${contentPressedClasses}` : `text-${color}-300`
+        }`;
+      case 'text':
+        return `${basicClasses} ${
+          pressed ? `text-${color}-400 ${contentPressedClasses}` : `text-${color}-300`
+        }`;
+    }
+  };
+  const customOnPress = async () => {
+    const { sound } = await Audio.Sound.createAsync(waterSound);
+    await sound.playAsync();
+    onPress && onPress();
+  };
   return (
     <Pressable
-      style={({ pressed }) => style(buttonInitialClasses(pressed), buttonClasses)}
-      onPress={onPress}
-      accessibilityLabel={accessibilityLabel}>
-      {({ pressed }) => children}
+      style={({ pressed }) => style(buttonComputedClasses(pressed))}
+      onPress={customOnPress}
+      accessibilityLabel={accessibilityLabel}
+      disabled={disabled}>
+      {({ pressed }) =>
+        children ?? <AppText style={style(contentComputedClasses(pressed))}>{content}</AppText>
+      }
     </Pressable>
   );
 }

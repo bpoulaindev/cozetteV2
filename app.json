@@ -1,6 +1,8 @@
 {
   "expo": {
     "name": "CozetteV2",
+    "currentFullName": "@bpoulain/CozetteV2",
+    "originalFullName": "@bpoulain/CozetteV2",
     "slug": "CozetteV2",
     "scheme": "cozettev2",
     "version": "1.0.0",
@@ -44,6 +46,7 @@
     },
     "plugins": [
       "expo-build-properties",
+      "expo-apple-authentication",
       [
         "expo-build-properties",
         {

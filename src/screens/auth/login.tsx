@@ -31,11 +31,6 @@ export const Login = () => {
   return (
     <View style={style('flex flex-col h-full items-center justify-between z-50 w-full bg-white')}>
       <View style={style('flex w-full justify-center items-center pb-8')}>
-        <Image
-          style={style('mt-16 w-[150px]')}
-          resizeMode='contain'
-          source={require('../../../assets/Cozette.png')}
-        />
         <AppText
           style={style(
             'text-xl md:text-2xl pt-1 lg:text-2.5xl font-normal text-center -mt-2 lg:mt-4 xl:mt-8'
