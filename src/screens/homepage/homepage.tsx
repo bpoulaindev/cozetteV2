@@ -1,8 +1,8 @@
 import { ScrollView, View } from 'react-native';
-import { SimpleButton } from '../../components/buttons';
+import { Button, SimpleButton } from '../../components/buttons';
 import { AppText } from '../../components/appText';
 import tw from 'twrnc';
-import { useState } from 'react';
+import React, { useState } from 'react';
 const { style } = tw;
 export const Homepage = () => {
   const [count, setCount] = useState<string[]>(['Wesh alors']);
@@ -11,7 +11,7 @@ export const Homepage = () => {
   };
   return (
     <ScrollView style={style('flex mt-20 px-8')}>
-      <SimpleButton
+      <Button
         content='Ajouter un wesh alors'
         variant='contained'
         color='primary'

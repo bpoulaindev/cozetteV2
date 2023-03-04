@@ -8,11 +8,13 @@
       "android": {
         "gradleCommand": ":app:assembleDebug",
         "credentialsSource": "local",
-        "buildType": "apk"
+        "buildType": "apk",
+        "resourceClass": "m1-medium"
       },
       "ios": {
         "buildConfiguration": "Debug",
-        "credentialsSource": "local"
+        "credentialsSource": "local",
+        "resourceClass": "m1-medium"
       }
     },
     "preview": {
