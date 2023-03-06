@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { GCP_ANDROID_CLIENT_ID, GCP_IOS_CLIENT_ID } from '@env';
 import { Button } from '../../../components/buttons';
+import { getAuth, signInWithCredential } from 'firebase/auth';
+import firebase from 'firebase/compat';
+import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+import { buildMinimalUser, createUser } from '../../../actions/users';
+import { AuthContext } from '../auth_context';
+import { useNavigate } from 'react-router-dom';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -23,6 +29,9 @@ interface GoogleCredentials {
 export const GoogleAuth = () => {
   const [token, setToken] = useState<string>('');
   const [userInfo, setUserInfo] = useState<any>(null);
+  const { isLoggedIn, login, logout, changeUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const auth = getAuth();
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: GCP_ANDROID_CLIENT_ID,
@@ -42,9 +51,18 @@ export const GoogleAuth = () => {
       const response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
         headers: { Authorization: `Bearer ${token}` }
       });
-
       const user = await response.json();
-      console.log('hallelujah it is working', user, typeof user, token);
+      const credential = GoogleAuthProvider.credential(user.idToken, user.accessToken);
+      // console.log('hallelujah it is working', user, typeof user, token);
+      signInWithCredential(auth, credential)
+        .then(async (userCredential) => {
+          const userToken = await userCredential.user?.getIdTokenResult();
+          const minimalUser = buildMinimalUser(userCredential.user);
+          createUser(userToken.token, minimalUser, login, changeUser).then(() => navigate('/'));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       setUserInfo(user);
     } catch (error) {
       // Add your own error handler here

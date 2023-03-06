@@ -21,6 +21,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { AnonymousLogin } from './anonymous_login';
 import { SvgArrowRight } from '../../../../assets/svg_components/svg_arrow_right';
+import { MinimalUser } from '../../../../types/users';
+import { createUser } from '../../../actions/users';
 
 const { style } = tw;
 export const RegisterPhone = () => {
@@ -56,7 +58,11 @@ export const RegisterPhone = () => {
     const attemptVerification = async () => {
       try {
         const credential = PhoneAuthProvider.credential(verificationId, verificationCode);
-        const test = await signInWithCredential(auth, credential);
+        signInWithCredential(auth, credential).then(async (userCredential) => {
+          // await createUser(userToken.token, minimalUser, login, changeUser).then(() =>
+          //   navigate('/')
+          // );
+        });
         navigate('/');
       } catch (err: any) {
         setConfirmationMessage(`Error: ${err.message}`);
