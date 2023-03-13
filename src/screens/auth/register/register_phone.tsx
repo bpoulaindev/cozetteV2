@@ -168,7 +168,6 @@ export const RegisterPhone = () => {
               data={Object.values(country || {}).map((e: any) => e.name)}
               onSelect={(selectedItem, index) => {
                 setSelectedCountry({ name: selectedItem, dial_code: country[index]?.dial_code });
-                // console.log('wesh alors', selectedItem, index);
               }}
               buttonTextAfterSelection={(selectedItem, index) => {
                 return `${selectedCountry.name} (${selectedCountry.dial_code})`;
@@ -186,7 +185,7 @@ export const RegisterPhone = () => {
                   </View>
                 );
               }}
-              dropdownStyle={style('w-full max-w-[90%] rounded-lg -mt-40')}
+              dropdownStyle={style('w-full max-w-[80%] rounded-lg mt-14')}
               defaultButtonText='France (+33)'
               search
             />
