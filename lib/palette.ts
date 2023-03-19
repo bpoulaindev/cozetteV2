@@ -9,25 +9,37 @@ export const Palette = {
   },
   white: '#FFFFFF',
   primary: {
-    100: '#FFCCF5',
+    100: '#FFF0FC',
     200: '#FF99EB',
     300: '#FF47DA',
     400: '#9D0082'
   },
   secondary: {
-    100: '#FFE7CC',
+    100: '#FFF8F0',
     200: '#FFCF99',
     300: '#FF8600',
     400: '#D36200'
   },
   tertiary: {
-    100: '#CCCCFF',
+    100: '#F0F0FF',
     200: '#9999FF',
     300: '#3333FF',
     400: '#00009D'
   },
-  info: '#CCE3FF',
-  success: '#CDFFCC',
-  warning: '#FFF4CC',
-  danger: '#FFD0D0'
+  info: {
+    100: '#F5F9FF',
+    300: '#CCE3FF'
+  },
+  success: {
+    100: '#F5FFF5',
+    300: '#CDFFCC'
+  },
+  warning: {
+    100: '#FFFDF5',
+    300: '#FFF4CC'
+  },
+  danger: {
+    100: '#FFF6F6',
+    300: '#FFD0D0'
+  }
 };

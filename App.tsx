@@ -5,7 +5,7 @@ import { Navbar } from './src/components/navbar';
 import { Navigate, Routes } from 'react-router-dom';
 import { StatusBar } from 'expo-status-bar';
 import { AuthContext, AuthProvider } from './src/screens/auth/auth_context';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Register } from './src/screens/auth/register/register';
 // @ts-ignore
 import { API_KEY } from '@env';
@@ -14,25 +14,49 @@ import { Onboarding } from './src/screens/onboarding/onboarding';
 import tw from './lib/tailwind';
 import { useDeviceContext } from 'twrnc';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
-  const { isLoggedIn, login, logout, changeUser } = useContext(AuthContext);
+  const { isLoggedIn, login, logout, changeUser, user } = useContext(AuthContext);
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(isLoggedIn);
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log('ok poto');
+
+  const checkUid = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@userUid');
+      if (value !== null) {
+        login();
+        setUserLoggedIn(true);
+        console.log('ok we have a value', value, userLoggedIn);
+      }
+    } catch (e) {
+      console.log('error getting uid', e);
+    }
+  };
+  const storeUid = async (uid: string) => {
+    try {
+      await AsyncStorage.setItem('@userUid', uid);
+    } catch (e) {
+      // saving error
+      console.log('error saving uid', e);
+    }
+  };
+  onAuthStateChanged(auth, (newUser) => {
+    if (newUser) {
+      console.log('ok poto', userLoggedIn, newUser);
       login();
-      changeUser(user as any);
+      changeUser(newUser as any);
       setUserLoggedIn(true);
-      const uid = user.uid;
-      // ...
+      const uid = newUser.uid;
+      storeUid(uid).then(() => console.log('uid saved'));
     } else {
       console.log('User is signed out');
       // ...
     }
   });
-  console.log('jen ai marre', isLoggedIn);
+  useEffect(() => {
+    checkUid().then(() => console.log('uid checked'));
+  }, []);
   useDeviceContext(tw);
   return (
     <AuthProvider>

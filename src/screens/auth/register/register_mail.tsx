@@ -5,18 +5,17 @@ import tw from '../../../../lib/tailwind';
 import { t } from 'i18next';
 import { createUserWithEmailAndPassword, getAuth, signInAnonymously } from 'firebase/auth';
 import { auth } from '../../../../firebaseConfig';
-import { createUser } from '../../../actions/users';
+import { buildMinimalUser, createUser } from '../../../actions/users';
 import firebase from 'firebase/compat';
-import User = firebase.User;
 import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
-import { Button, ComplexButton, SimpleButton } from '../../../components/buttons';
+import { Button } from '../../../components/buttons';
 import { TermsOfUse } from './terms_of_use';
-import UserCredential = firebase.auth.UserCredential;
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth_context';
-import { CztUser } from '../../../../types/users';
+import { CztUser, MinimalUser } from '../../../../types/users';
 import { AnonymousLogin } from './anonymous_login';
 import { SvgArrowRight } from '../../../../assets/svg_components/svg_arrow_right';
+import UserCredential = firebase.auth.UserCredential;
 
 const { style } = tw;
 export const RegisterMail = () => {
@@ -25,6 +24,7 @@ export const RegisterMail = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const { isLoggedIn, login, logout, changeUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const authUser = useCallback(() => {
     console.log('sending request', mail, password);
     //const auth = getAuth();
@@ -32,36 +32,13 @@ export const RegisterMail = () => {
       .then(async (userCredential) => {
         setErrorMessage('');
         const userToken = await userCredential.user?.getIdTokenResult();
-        return fetch('http://10.43.128.154:3333/me', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${userToken?.token}`
-          },
-          body: JSON.stringify({
-            user: userCredential.user
-          })
-        })
-          .then((response) => {
-            if (response.status === 201) {
-              return response.json();
-            }
-            return null;
-          })
-          .then((response) => {
-            // console.log('response', response);
-            login();
-            // console.log('oeoeoeoe', response.user);
-            changeUser(response.user);
-          })
-          .then(() => navigate('/'));
+        const minimalUser = buildMinimalUser(userCredential.user);
+        createUser(userToken.token, minimalUser, login, changeUser).then(() => navigate('/'));
       })
       .catch((error) => {
         const errorCode = error.code;
         setErrorMessage(error.message);
         console.log(errorCode, errorMessage);
-        // ..
       });
   }, [mail, password]);
   return (

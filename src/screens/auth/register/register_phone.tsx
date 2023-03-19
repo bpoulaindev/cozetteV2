@@ -21,6 +21,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { AnonymousLogin } from './anonymous_login';
 import { SvgArrowRight } from '../../../../assets/svg_components/svg_arrow_right';
+import { MinimalUser } from '../../../../types/users';
+import { createUser } from '../../../actions/users';
 
 const { style } = tw;
 export const RegisterPhone = () => {
@@ -56,7 +58,11 @@ export const RegisterPhone = () => {
     const attemptVerification = async () => {
       try {
         const credential = PhoneAuthProvider.credential(verificationId, verificationCode);
-        const test = await signInWithCredential(auth, credential);
+        signInWithCredential(auth, credential).then(async (userCredential) => {
+          // await createUser(userToken.token, minimalUser, login, changeUser).then(() =>
+          //   navigate('/')
+          // );
+        });
         navigate('/');
       } catch (err: any) {
         setConfirmationMessage(`Error: ${err.message}`);
@@ -162,7 +168,6 @@ export const RegisterPhone = () => {
               data={Object.values(country || {}).map((e: any) => e.name)}
               onSelect={(selectedItem, index) => {
                 setSelectedCountry({ name: selectedItem, dial_code: country[index]?.dial_code });
-                // console.log('wesh alors', selectedItem, index);
               }}
               buttonTextAfterSelection={(selectedItem, index) => {
                 return `${selectedCountry.name} (${selectedCountry.dial_code})`;
@@ -180,7 +185,7 @@ export const RegisterPhone = () => {
                   </View>
                 );
               }}
-              dropdownStyle={style('w-full max-w-[90%] rounded-lg -mt-40')}
+              dropdownStyle={style('w-full max-w-[80%] rounded-lg mt-14')}
               defaultButtonText='France (+33)'
               search
             />

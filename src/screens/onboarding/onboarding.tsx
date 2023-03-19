@@ -19,6 +19,7 @@ import tw from '../../../lib/tailwind';
 import { SvgOnboardingThree } from '../../../assets/svg_components/onboarding/svg_onboarding_three';
 import { SvgOnboardingTwo } from '../../../assets/svg_components/onboarding/svg_onboarding_two';
 import { SvgArrowRight } from '../../../assets/svg_components/svg_arrow_right';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { style } = tw;
 
@@ -69,6 +70,7 @@ const Pagination = ({ index }: { index: number }) => {
 
 export const Onboarding = () => {
   const [index, setIndex] = useState<number>(0);
+  const [path, setPath] = useState<string | null>(null);
   const navigate = useNavigate();
   const memoIndex = useMemo(() => {
     return index;
@@ -79,6 +81,25 @@ export const Onboarding = () => {
     indexRef.current = index;
     setIndex(index);
   };
+  useEffect(() => {
+    if (path) {
+      navigate(path);
+    }
+  }, [path]);
+  const checkUid = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@userUid');
+      if (value !== null) {
+        console.log('ok we have a value', value);
+        setPath('/');
+      }
+    } catch (e) {
+      console.log('error getting uid', e);
+    }
+  };
+  useEffect(() => {
+    checkUid().then(() => console.log('done'));
+  }, []);
   const onScroll = useCallback((event: any) => {
     const slideSize = event.nativeEvent.layoutMeasurement.width;
     const index = event.nativeEvent.contentOffset.x / slideSize;
