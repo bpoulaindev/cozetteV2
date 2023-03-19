@@ -31,6 +31,14 @@
 				<string>com.bpoulain.CozetteV2</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1029132809433-s0sqm7b2i8ktaffjdj481bj3gqcb489l</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

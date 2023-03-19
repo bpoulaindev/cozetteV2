@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { View, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text } from 'react-native';
 import { Button } from '../../../components/buttons';
 import { AppText } from '../../../components/appText';
@@ -15,16 +15,23 @@ import { SvgMail } from '../../../../assets/svg_components/svg_mail';
 import { SvgPhone } from '../../../../assets/svg_components/svg_phone';
 import { AppleAuth } from '../platform_auth/apple_auth';
 import { GoogleAuth } from '../platform_auth/google_auth';
+import { firebaseConfig } from '../../../../firebaseConfig';
+import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 
 const { style } = tw;
 export const Register = () => {
   const { t } = useTranslation();
   const [mode, setMode] = useState<'phone' | 'mail'>('mail');
-
+  const recaptchaVerifier = useRef(null);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView
         style={style('flex flex-col h-full items-center justify-start z-50 w-full bg-cream')}>
+        <FirebaseRecaptchaVerifierModal
+          ref={recaptchaVerifier}
+          firebaseConfig={firebaseConfig}
+          attemptInvisibleVerification
+        />
         <View style={style('flex w-full justify-center items-center max-w-[90%] mt-12')}>
           <SvgCozette fill={Palette.secondary[300]} />
           <AppText

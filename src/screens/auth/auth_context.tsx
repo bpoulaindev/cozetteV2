@@ -12,22 +12,20 @@ interface AuthContextData {
 export const AuthContext = createContext<AuthContextData>({
   user: null,
   changeUser: () => {
-    console.log('no set user function provided');
+    // console.log('no set user function provided');
   },
   isLoggedIn: false,
   login: () => {
-    console.log('no login function provided');
+    // console.log('no login function provided');
   },
   logout: () => {
-    console.log('no logout function provided');
+    // console.log('no logout function provided');
   }
 });
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<CztUser | null>(null);
-  const [userId, setUserId] = useState({});
-  console.log('ok lesgo', isLoggedIn, user, userId);
   const login = () => {
     setIsLoggedIn(true);
   };
