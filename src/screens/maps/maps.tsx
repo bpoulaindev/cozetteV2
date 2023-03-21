@@ -4,7 +4,7 @@ import tw from 'twrnc';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import { decode } from '@googlemaps/polyline-codec';
 import { AppText } from '../../components/appText';
-import { SimpleButton } from '../../components/buttons';
+import { Button } from '../../components/buttons';
 //@ts-ignore
 import { MAPS_API_KEY } from '@env';
 
@@ -183,11 +183,11 @@ export const Maps = () => {
       )}
       <View style={style('flex-row justify-evenly w-full mb-4')}>
         {allModes.map((mode) => (
-          <SimpleButton
+          <Button
             key={mode}
             content={mode}
             variant='contained'
-            color={mode === selectedMode ? 'primary' : 'light'}
+            color={mode === selectedMode ? 'primary' : 'secondary'}
             onPress={() => handleSelectMode(mode)}
             buttonClasses={'rounded-lg py-2 mx-2'}
           />

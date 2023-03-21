@@ -68,6 +68,9 @@ export default function App() {
           <Route path='/login' element={<Homepage />} />
           {userLoggedIn && (
             <>
+              <Route path='/journeys' element={<Homepage />} />
+              <Route path='/search' element={<Homepage />} />
+              <Route path='/profile' element={<Homepage />} />
               <Route path='/maps' element={<Maps />} />
             </>
           )}
