@@ -25,5 +25,8 @@
   "Onboarding.description.2": "Discover the city from another angle according to your needs and desires.",
   "Onboarding.description.3": "No more searching on the internet. Everything is here!",
   "Main.skip": "Skip",
-  "Main.next": "Next"
+  "Main.next": "Next",
+  "Main.bar": "Bar",
+  "Main.restaurant": "Restaurant",
+  "Main.activity": "Activity"
 }

@@ -1,7 +1,7 @@
 import tw from '../../../lib/tailwind';
 import { Image, View } from 'react-native';
 import { Spot } from '../../../types/spots';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { AppText } from '../appText';
 import { SvgPizza } from '../../../assets/svg_components/icons/food/svg_pizza';
 import { SvgDining } from '../../../assets/svg_components/icons/food/svg_dining';
@@ -10,6 +10,8 @@ import { SvgBurger } from '../../../assets/svg_components/icons/food/svg_burger'
 import { SvgHeart } from '../../../assets/svg_components/icons/svg_heart';
 import { Palette } from '../../../lib/palette';
 import { getSpot } from '../../actions/spots';
+import { t } from 'i18next';
+import { SpotIcon } from './spot_icon';
 
 const { style } = tw;
 interface SpotCardProps {
@@ -28,6 +30,33 @@ export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) =>
   useEffect(() => {
     fetchData();
   }, []);
+  const { typeColor, mainIcon, iconType } = useMemo(() => {
+    switch (spot?.type) {
+      case 'bar':
+        return {
+          typeColor: 'secondary',
+          mainIcon: 'cocktail',
+          iconType: 'food'
+        };
+      case 'restaurant':
+        return {
+          typeColor: 'tertiary',
+          mainIcon: 'dining',
+          iconType: 'food'
+        };
+      default:
+        return {
+          typeColor: 'primary',
+          mainIcon: 'activities',
+          iconType: 'activities'
+        };
+    }
+  }, [spot?.type]) as {
+    typeColor: 'tertiary' | 'secondary' | 'primary';
+    mainIcon: 'activities' | 'dining' | 'cocktail';
+    iconType: 'food' | 'activities';
+  };
+
   return (
     <View
       style={style(
@@ -50,16 +79,28 @@ export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) =>
         <View style={style('flex flex-row justify-between items-center mt-2')}>
           <View
             style={style(
-              'px-3 py-1 rounded-full bg-tertiary-100 max-h-[30px] flex flex-row items-center justify-start'
+              'px-3 py-1 rounded-full max-h-[30px] flex flex-row items-center justify-start',
+              `bg-${typeColor}-100`
             )}>
-            <SvgDining classes='max-h-4 max-w-4 mr-2' />
-            <AppText style={style('text-sm text-tertiary-300')}>{spot?.type}</AppText>
+            <SpotIcon type={iconType} color={typeColor} icon={mainIcon} classes='mr-2 max-h-4' />
+            <AppText style={style('text-sm', `text-${typeColor}-300`)}>
+              {t(`Main.${spot?.type}`) ?? ''}
+            </AppText>
           </View>
           <View style={style('flex flex-row')}>
-            <SvgPizza classes='max-h-5 max-w-5 mr-4' />
-            <SvgBurger classes='max-h-5 max-w-5 mr-4' />
-            <SvgRamen classes='max-h-5 max-w-5' />
+            {spot?.food?.map((food, index) => (
+              <SpotIcon
+                key={index}
+                type='food'
+                color={typeColor}
+                icon={food}
+                classes='ml-3 max-h-4'
+              />
+            ))}
           </View>
+        </View>
+        <View style={style('flex flex-row justify-between items-center mt-2')}>
+          <AppText style={style('text-sm font-700')}>{spot?.ranking} / 5</AppText>
         </View>
         <AppText style={style('text-lg font-600 mt-2')}>{spot?.details.name}</AppText>
         <AppText style={style('text-sm text-gray-400 mt-1')}>{spot?.details.description}</AppText>

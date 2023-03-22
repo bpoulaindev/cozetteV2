@@ -18,6 +18,7 @@
     "androidBundle": "npx react-native bundle --platform android --dev false --entry-file index.ts --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@expo/webpack-config": "^0.17.2",
     "@googlemaps/polyline-codec": "^1.0.28",
     "@react-native-async-storage/async-storage": "~1.17.3",
