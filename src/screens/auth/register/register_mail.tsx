@@ -16,6 +16,8 @@ import { CztUser, MinimalUser } from '../../../../types/users';
 import { AnonymousLogin } from './anonymous_login';
 import { SvgArrowRight } from '../../../../assets/svg_components/svg_arrow_right';
 import UserCredential = firebase.auth.UserCredential;
+import { AppleAuth } from '../platform_auth/apple_auth';
+import { GoogleAuth } from '../platform_auth/google_auth';
 
 const { style } = tw;
 export const RegisterMail = () => {
@@ -44,7 +46,7 @@ export const RegisterMail = () => {
   return (
     <View
       style={style('w-full flex justify-between h-full items-center mt-8 max-h-[50%] max-w-[80%]')}>
-      <View style={style('w-full flex flex-col h-auto')}>
+      <View style={style('w-full flex flex-col h-full')}>
         <View style={style('w-full')}>
           <TextInput
             style={style('w-full py-4 px-4 border-[.5px] border-indigo-800 bg-cream rounded-lg', {
@@ -56,7 +58,7 @@ export const RegisterMail = () => {
             returnKeyType='next'
           />
         </View>
-        <View style={style('w-full mt-8')}>
+        <View style={style('w-full mt-6')}>
           <TextInput
             style={style(
               'w-full relative py-4 px-4 bg-cream border-[.5px] border-indigo-800 rounded-lg'
@@ -88,6 +90,13 @@ export const RegisterMail = () => {
             <AppText style={style('mt-8 text-red-500')}>{errorMessage}</AppText>
           )}
           <TermsOfUse />
+          <View style={style('w-full h-auto flex flex-col mt-4')}>
+            <AppText style={style('text-center text-gray-300 text-sm')}>Ou continuer avec</AppText>
+            <View style={style('w-full flex flex-row justify-center mt-2')}>
+              <AppleAuth classes='mr-8' />
+              <GoogleAuth />
+            </View>
+          </View>
         </View>
       </View>
       <View style={style('flex flex-row w-full items-center justify-between')}>

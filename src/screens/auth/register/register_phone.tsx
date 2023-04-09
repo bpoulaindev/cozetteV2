@@ -23,6 +23,8 @@ import { AnonymousLogin } from './anonymous_login';
 import { SvgArrowRight } from '../../../../assets/svg_components/svg_arrow_right';
 import { MinimalUser } from '../../../../types/users';
 import { createUser } from '../../../actions/users';
+import { AppleAuth } from '../platform_auth/apple_auth';
+import { GoogleAuth } from '../platform_auth/google_auth';
 
 const { style } = tw;
 export const RegisterPhone = () => {
@@ -160,8 +162,8 @@ export const RegisterPhone = () => {
           </View>
         </Modal>
       ) : (
-        <View style={style('w-full flex flex-col h-full justify-between')}>
-          <View style={style('w-full flex flex-col h-auto')}>
+        <View style={style('w-full flex flex-col h-full')}>
+          <View style={style('w-full flex flex-col h-full')}>
             <SelectDropdown
               buttonStyle={style('w-full rounded-lg bg-cream border-[.5px] border-indigo-800')}
               buttonTextStyle={style('text-sm text-left')}
@@ -191,7 +193,7 @@ export const RegisterPhone = () => {
             />
             <View
               style={style(
-                'flex flex-row w-full items-center mt-8 py-4 bg-cream border-[.5px] border-indigo-800 rounded-lg'
+                'flex flex-row w-full items-center mt-6 py-4 bg-cream border-[.5px] border-indigo-800 rounded-lg'
               )}>
               <AppText style={style('w-auto pl-4 pr-2')}>{selectedCountry.dial_code}</AppText>
               <TextInput
@@ -206,6 +208,15 @@ export const RegisterPhone = () => {
             </View>
             {message.length > 0 && <AppText style={style('mt-4 text-red-500')}>{message}</AppText>}
             <TermsOfUse />
+            <View style={style('w-full flex flex-col mt-4')}>
+              <AppText style={style('text-center text-gray-300 text-sm')}>
+                Ou continuer avec
+              </AppText>
+              <View style={style('w-full flex flex-row justify-center mt-2')}>
+                <AppleAuth classes='mr-8' />
+                <GoogleAuth />
+              </View>
+            </View>
           </View>
           <View style={style('flex flex-row w-full items-center justify-between')}>
             <AnonymousLogin />

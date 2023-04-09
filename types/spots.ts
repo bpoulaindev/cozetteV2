@@ -45,6 +45,7 @@ export interface Spot {
     phone: string;
     website: string;
   };
+  placeId?: string;
   type: 'bar' | 'restaurant' | 'activity';
   food?: Array<FoodType>;
   activities?: Array<ActivitiesType>;
