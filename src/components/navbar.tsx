@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Button } from './buttons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Linking } from 'react-native';
@@ -29,80 +29,110 @@ export const Navbar = () => {
       style={style(
         'flex flex-row w-full justify-between items-center bg-white absolute bottom-0 z-50 py-3 px-2'
       )}>
-      <Button variant='text' color='primary' onPress={() => redirect('/')}>
-        <View style={style('flex flex-col items-center')}>
-          <View
-            style={style(
-              'px-6 py-1 rounded-full h-7 flex flex-col justify-center',
-              isHome ? 'bg-secondary-100' : 'bg-transparent'
-            )}>
-            <SvgHome
-              fill={isHome ? Palette.secondary[300] : Palette.dark}
-              classes='max-w-5 max-h-5'
-              contained={isHome}
-            />
+      <Pressable
+        onPress={() => redirect('/')}
+        style={style('px-2.5 py-1.5 border border-transparent rounded-xl')}>
+        {({ pressed }) => (
+          <View style={style('flex flex-col items-center')}>
+            <View
+              style={style(
+                'px-6 py-1 rounded-full h-7 flex flex-col justify-center',
+                isHome || pressed ? 'bg-secondary-100' : 'bg-transparent'
+              )}>
+              <SvgHome
+                fill={isHome || pressed ? Palette.secondary[300] : Palette.dark}
+                classes='max-w-5 max-h-5'
+                contained={isHome || pressed}
+              />
+            </View>
+            <AppText
+              style={style(
+                'text-sm',
+                isHome || pressed ? 'text-secondary-300 font-500' : 'text-dark'
+              )}>
+              Accueil
+            </AppText>
           </View>
-          <AppText style={style('text-sm', isHome ? 'text-secondary-300 font-500' : 'text-dark')}>
-            Accueil
-          </AppText>
-        </View>
-      </Button>
-      <Button variant='text' color='primary' onPress={() => redirect('/journeys')}>
-        <View style={style('flex flex-col items-center')}>
-          <View
-            style={style(
-              'px-6 py-1 rounded-full h-7 flex flex-col justify-center',
-              isJourneys ? 'bg-secondary-100' : 'bg-transparent'
-            )}>
-            <SvgFlag
-              fill={isJourneys ? Palette.secondary[300] : Palette.dark}
-              classes='max-w-4 max-h-4'
-              contained={isJourneys}
-            />
+        )}
+      </Pressable>
+      <Pressable
+        onPress={() => redirect('/journeys')}
+        style={style('px-2.5 py-1.5 border border-transparent rounded-xl')}>
+        {({ pressed }) => (
+          <View style={style('flex flex-col items-center')}>
+            <View
+              style={style(
+                'px-6 py-1 rounded-full h-7 flex flex-col justify-center',
+                isJourneys || pressed ? 'bg-secondary-100' : 'bg-transparent'
+              )}>
+              <SvgFlag
+                fill={isJourneys || pressed ? Palette.secondary[300] : Palette.dark}
+                classes='max-w-4 max-h-4'
+                contained={isJourneys || pressed}
+              />
+            </View>
+            <AppText
+              style={style(
+                'text-sm',
+                isJourneys || pressed ? 'text-secondary-300 font-500' : 'text-dark'
+              )}>
+              Parcours
+            </AppText>
           </View>
-          <AppText
-            style={style('text-sm', isJourneys ? 'text-secondary-300 font-500' : 'text-dark')}>
-            Parcours
-          </AppText>
-        </View>
-      </Button>
-      <Button variant='text' color='primary' onPress={() => redirect('/search')}>
-        <View style={style('flex flex-col items-center')}>
-          <View
-            style={style(
-              'px-6 py-1 rounded-full h-7 flex flex-col justify-center',
-              isSearch ? 'bg-secondary-100' : 'bg-transparent'
-            )}>
-            <SvgSearch
-              fill={isSearch ? Palette.secondary[300] : Palette.dark}
-              classes={isSearch ? 'max-w-6 max-h-6' : 'max-w-4 max-h-4'}
-              contained={isSearch}
-            />
+        )}
+      </Pressable>
+      <Pressable
+        onPress={() => redirect('/search')}
+        style={style('px-2.5 py-1.5 border border-transparent rounded-xl')}>
+        {({ pressed }) => (
+          <View style={style('flex flex-col items-center')}>
+            <View
+              style={style(
+                'px-6 py-1 rounded-full h-7 flex flex-col justify-center',
+                isSearch || pressed ? 'bg-secondary-100' : 'bg-transparent'
+              )}>
+              <SvgSearch
+                fill={isSearch || pressed ? Palette.secondary[300] : Palette.dark}
+                classes={isSearch || pressed ? 'max-w-6 max-h-6' : 'max-w-4 max-h-4'}
+                contained={isSearch || pressed}
+              />
+            </View>
+            <AppText
+              style={style(
+                'text-sm',
+                isSearch || pressed ? 'text-secondary-300 font-500' : 'text-dark'
+              )}>
+              Recherche
+            </AppText>
           </View>
-          <AppText style={style('text-sm', isSearch ? 'text-secondary-300 font-500' : 'text-dark')}>
-            Recherche
-          </AppText>
-        </View>
-      </Button>
-      <Button variant='text' color='primary' onPress={() => redirect('/profile')}>
-        <View style={style('flex flex-col items-center')}>
-          <View
-            style={style(
-              'px-6 py-1 rounded-full h-7 flex flex-col justify-center',
-              isProfile ? 'bg-secondary-100' : 'bg-transparent'
-            )}>
-            <SvgProfile
-              fill={isProfile ? Palette.secondary[300] : Palette.dark}
-              classes='max-w-4 max-h-4'
-              contained={isProfile}
-            />
+        )}
+      </Pressable>
+      <Pressable
+        onPress={() => redirect('/profile')}
+        style={style('px-2.5 py-1.5 border border-transparent rounded-xl')}>
+        {({ pressed }) => (
+          <View style={style('flex flex-col items-center')}>
+            <View
+              style={style(
+                'px-6 py-1 rounded-full h-7 flex flex-col justify-center',
+                isProfile || pressed ? 'bg-secondary-100' : 'bg-transparent'
+              )}>
+              <SvgProfile
+                fill={isProfile || pressed ? Palette.secondary[300] : Palette.dark}
+                classes='max-w-4 max-h-4'
+                contained={(isProfile || pressed) as boolean}
+              />
+            </View>
+            <AppText
+              style={style(
+                'text-sm',
+                isProfile || pressed ? 'text-secondary-300 font-500' : 'text-dark'
+              )}>
+              Compte
+            </AppText>
           </View>
-          <AppText
-            style={style('text-sm', isProfile ? 'text-secondary-300 font-500' : 'text-dark')}>
-            Compte
-          </AppText>
-        </View>
-      </Button>
+        )}
+      </Pressable>
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { GCP_ANDROID_CLIENT_ID, GCP_IOS_CLIENT_ID } from '@env';
@@ -13,6 +13,9 @@ import { firebaseConfig } from '../../../../firebaseConfig';
 import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 import { Prompt } from 'expo-auth-session';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+import { SvgGoogle } from '../../../../assets/svg_components/onboarding/svg_google';
+import tw from '../../../../lib/tailwind';
+const { style } = tw;
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -89,15 +92,16 @@ export const GoogleAuth = () => {
         attemptInvisibleVerification
       />
       {userInfo === null ? (
-        <Button
-          content='Sign in with Google'
-          variant='contained'
-          color='primary'
+        <Pressable
           disabled={!request}
+          style={style(
+            'rounded-full bg-white text-black border-gray-100 border-[.5px] w-[50px] h-[50px] flex justify-center items-center'
+          )}
           onPress={() => {
             promptAsync();
-          }}
-        />
+          }}>
+          <SvgGoogle classes='max-h-3 max-w-3' />
+        </Pressable>
       ) : (
         <Text style={styles.text}>{userInfo?.name}</Text>
       )}

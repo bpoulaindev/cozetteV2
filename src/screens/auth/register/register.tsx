@@ -6,9 +6,6 @@ import tw from '../../../../lib/tailwind';
 import { Trans, useTranslation } from 'react-i18next';
 import { RegisterMail } from './register_mail';
 import { RegisterPhone } from './register_phone';
-import { useNavigate } from 'react-router-dom';
-import { getAuth, signInAnonymously } from 'firebase/auth';
-import { CztUser } from '../../../../types/users';
 import { SvgCozette } from '../../../../assets/svg_components/svg_cozette';
 import { Palette } from '../../../../lib/palette';
 import { SvgMail } from '../../../../assets/svg_components/svg_mail';
@@ -26,7 +23,9 @@ export const Register = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView
-        style={style('flex flex-col h-full items-center justify-start z-50 w-full bg-cream')}>
+        style={style(
+          'flex flex-col h-full items-center justify-start z-50 w-full bg-cream max-h-[100vh]'
+        )}>
         <FirebaseRecaptchaVerifierModal
           ref={recaptchaVerifier}
           firebaseConfig={firebaseConfig}
@@ -47,31 +46,26 @@ export const Register = () => {
               components={[<Text key='bold_element' style={style('font-bold')} />]}
             />
           </AppText>
-          <AppleAuth />
-          <GoogleAuth />
           <View style={style('mt-10 w-full flex flex-col')}>
             <View
               style={style('flex flex-row w-full justify-between rounded-xl items-center mb-4')}>
               <Button
                 buttonClasses='w-1/2 rounded-l-full'
-                contentClasses='text-xl'
+                contentClasses='text-lg'
                 variant={mode === 'mail' ? 'contained' : 'outlined'}
                 color='primary'
                 onPress={() => setMode('mail')}>
                 <View style={style('flex flex-row items-center')}>
                   <SvgMail classes='mr-2' fill={mode === 'mail' ? Palette.white : Palette.dark} />
                   <AppText
-                    style={style(
-                      'text-xl font-bold',
-                      mode === 'mail' ? 'text-white' : 'text-dark'
-                    )}>
+                    style={style('text-lg font-800', mode === 'mail' ? 'text-white' : 'text-dark')}>
                     {t('Register.mail')}
                   </AppText>
                 </View>
               </Button>
               <Button
                 buttonClasses='w-1/2 rounded-r-full'
-                contentClasses='text-xl text-dark'
+                contentClasses='text-lg text-dark'
                 variant={mode === 'mail' ? 'outlined' : 'contained'}
                 color='primary'
                 onPress={() => setMode('phone')}>
@@ -79,7 +73,7 @@ export const Register = () => {
                   <SvgPhone classes='mr-2' fill={mode === 'phone' ? Palette.white : Palette.dark} />
                   <AppText
                     style={style(
-                      'text-xl font-bold',
+                      'text-lg font-800',
                       mode === 'phone' ? 'text-white' : 'text-dark'
                     )}>
                     {t('Register.phone')}

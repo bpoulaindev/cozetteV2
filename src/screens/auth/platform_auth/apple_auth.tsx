@@ -27,17 +27,17 @@ interface AppleCredentials {
   identityToken: string | null;
   authorizationCode: string | null;
 }
-export const AppleAuth = () => {
+export const AppleAuth = ({ classes }: { classes?: string }) => {
   const auth = getAuth();
   const navigate = useNavigate();
   const { isLoggedIn, login, logout, changeUser } = useContext(AuthContext);
   return (
-    <View style={style('flex items-center justify-center')}>
+    <View style={style('flex items-center justify-center', classes)}>
       <AppleAuthentication.AppleAuthenticationButton
         buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
         buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
-        cornerRadius={5}
-        style={style('w-[200px] h-[50px]')}
+        cornerRadius={100}
+        style={style('w-[50px] h-[50px]')}
         onPress={async () => {
           try {
             const nonce = Math.random().toString(36).substring(2, 10);
@@ -53,17 +53,12 @@ export const AppleAuth = () => {
               nonce: hashedNonce
             });
             const { identityToken, user } = appleCredential;
-            // const userCredential = await signInWithCredential(auth, credential);
-            // console.log('it worked !!!!!', credential);
-            // const provider = new firebase.auth.OAuthProvider('apple.com');
-            // const provider = new OAuthProvider('apple.com');
             const provider = new firebase.auth.OAuthProvider('apple.com');
             const credential = provider.credential({
               idToken: appleCredential.identityToken ?? '',
               rawNonce: hashedNonce
             });
             console.log('provider', credential, identityToken, user);
-            console.log('allez stp', credential);
             await firebase
               .auth()
               .signInWithCredential(credential)

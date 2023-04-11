@@ -2,6 +2,32 @@ export interface Spots {
   [key: string]: Spot;
 }
 
+export type FoodType =
+  | 'cafe'
+  | 'icecream'
+  | 'burger'
+  | 'cocktail'
+  | 'ramen'
+  | 'pizza'
+  | 'beer'
+  | 'bakery'
+  | 'wine'
+  | 'dining';
+
+export type ActivitiesType =
+  | 'sports'
+  | 'games'
+  | 'animals'
+  | 'theater'
+  | 'activities'
+  | 'relaxed'
+  | 'museum'
+  | 'music'
+  | 'cinema'
+  | 'LGBTQIA+'
+  | 'nature'
+  | 'party';
+
 export interface Spot {
   id: string;
   location: {
@@ -19,8 +45,12 @@ export interface Spot {
     phone: string;
     website: string;
   };
+  placeId?: string;
   type: 'bar' | 'restaurant' | 'activity';
-  food?: 'pizza' | 'iceCream' | 'burgers'[];
+  food?: Array<FoodType>;
+  activities?: Array<ActivitiesType>;
+  ranking?: number;
+  features?: Array<'disabled' | 'ecology' | 'family'>;
   tags?: string[];
   atmosphere: string[];
   promoted: boolean;

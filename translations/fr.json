@@ -25,5 +25,8 @@
   "Onboarding.description.2": "On aime notre ville et on veut vous la montrer comme nous la voyons <0>au quotidien</0>, sublime.",
   "Onboarding.description.3": "Une seule appli pour réinventer tes sorties, <0>te donner de l’inspi</0>, libérer ton esprit du scroll infini (on est forts en rimes dans le Nord)",
   "Main.skip": "Passer",
-  "Main.next": "Suivant"
+  "Main.next": "Suivant",
+  "Main.bar": "Bar",
+  "Main.restaurant": "Restaurant",
+  "Main.activity": "Activité"
 }
