@@ -4,7 +4,7 @@ import { Palette } from '../../../lib/palette';
 import { Icons } from '../../../assets/svg_components/icons';
 interface SpotIconsProps {
   type: 'food' | 'activities';
-  color?: 'tertiary' | 'secondary' | 'primary';
+  color?: 'tertiary' | 'secondary' | 'primary' | 'typedWhite';
   icon: FoodType | ActivitiesType;
   classes?: string;
   fill?: string;

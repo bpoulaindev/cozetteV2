@@ -72,7 +72,7 @@ export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) =>
     return (
       <View
         style={style(
-          'flex w-full flex-col max-w-[80vw] p-2 h-full bg-gray-100 rounded-lg items-center justify-center',
+          'flex w-full flex-col max-w-[80vw] p-2 h-100 bg-gray-100 rounded-lg items-center justify-center',
           classes?.container
         )}></View>
     );
