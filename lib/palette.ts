@@ -7,7 +7,11 @@ export const Palette = {
     300: '#313144',
     400: '#000029'
   },
+  yellow: '#facc15',
   white: '#FFFFFF',
+  typedWhite: {
+    300: '#FFFFFF'
+  },
   primary: {
     100: '#FFF0FC',
     200: '#FF99EB',

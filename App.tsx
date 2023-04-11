@@ -15,6 +15,7 @@ import tw from './lib/tailwind';
 import { useDeviceContext } from 'twrnc';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SpotPage } from './src/screens/spot/spot';
 
 export default function App() {
   const { isLoggedIn, login, logout, changeUser, user } = useContext(AuthContext);
@@ -68,7 +69,11 @@ export default function App() {
           <Route path='/login' element={<Homepage />} />
           {userLoggedIn && (
             <>
+              <Route path='/journeys' element={<Homepage />} />
+              <Route path='/search' element={<Homepage />} />
+              <Route path='/profile' element={<Homepage />} />
               <Route path='/maps' element={<Maps />} />
+              <Route path='/spot/:id' element={<SpotPage />} />
             </>
           )}
         </Routes>
