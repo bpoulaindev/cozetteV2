@@ -1,4 +1,3 @@
-import { getPlaceInformations } from '../../../actions/maps';
 import React, { useEffect, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import tw from '../../../../lib/tailwind';
@@ -15,7 +14,7 @@ const DailyOpeningTime = ({ weekdayText }: { weekdayText: string }) => {
   const [day, timeRange] = weekdayText.split(': ');
   const [startTime, endTime] = timeRange.match(/\d{2}:\d{2}/g) ?? ['Fermé'];
   return (
-    <View style={style('flex flex-row justify-start mt-2 ml-2')}>
+    <View style={style('flex flex-row justify-start mt-4 ml-2')}>
       <AppText>{day.charAt(0).toUpperCase() + day.slice(1)}</AppText>
       <AppText style={style('ml-4 font-medium', startTime === 'Fermé' && 'text-red-500')}>
         {startTime === 'Fermé' ? 'Fermé' : `${startTime} - ${endTime}`}

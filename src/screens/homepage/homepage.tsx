@@ -14,6 +14,9 @@ export const Homepage = () => {
         showsHorizontalScrollIndicator={false}
         alwaysBounceVertical={false}
         alwaysBounceHorizontal={false}>
+        <View style={style('flex w-full max-w-[90%] mx-5 bg-primary-100 mt-6 p-2 rounded-xl')}>
+          <AppText style={style('text-2xl font-800 text-primary-300')}>Bonjour Fred !</AppText>
+        </View>
         <WeekSelection />
         <AppText style={style('text-2xl font-600 max-w-[90%] mt-10 ml-4')}>
           Nos dernières nouveautés

@@ -27,7 +27,7 @@ interface SpotCardProps {
     container?: string;
   };
 }
-export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) => {
+export const FavCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) => {
   const [spot, setSpot] = useState<Spot | null>(null);
   const [placeInfos, setPlaceInfos] = useState<PlaceInfos | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -97,7 +97,7 @@ export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) =>
             style={style(
               'absolute top-[-2] right-[-2] w-10 h-10 bg-white p-2 rounded-full flex items-center justify-center'
             )}>
-            <SvgHeart classes='max-w-6 max-h-4' fill={Palette.gray[100]} />
+            <SvgHeart classes='max-w-6 max-h-4' fill={Palette.primary[300]} />
           </View>
           <View style={style('flex flex-row justify-between items-center mt-2')}>
             <View

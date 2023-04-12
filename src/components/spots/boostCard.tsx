@@ -3,17 +3,12 @@ import { Image, TouchableOpacity, View } from 'react-native';
 import { Spot } from '../../../types/spots';
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppText } from '../appText';
-import { SvgPizza } from '../../../assets/svg_components/icons/food/svg_pizza';
-import { SvgDining } from '../../../assets/svg_components/icons/food/svg_dining';
-import { SvgRamen } from '../../../assets/svg_components/icons/food/svg_ramen';
-import { SvgBurger } from '../../../assets/svg_components/icons/food/svg_burger';
 import { SvgHeart } from '../../../assets/svg_components/icons/svg_heart';
 import { Palette } from '../../../lib/palette';
 import { getSpot } from '../../actions/spots';
 import { t } from 'i18next';
 import { SpotIcon } from './spot_icon';
 import { getPlaceInformations } from '../../actions/places';
-import { ArrowPathIcon } from 'react-native-heroicons/solid';
 import { useNavigate } from 'react-router-dom';
 
 const { style } = tw;
@@ -27,7 +22,7 @@ interface SpotCardProps {
     container?: string;
   };
 }
-export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) => {
+export const BoostCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) => {
   const [spot, setSpot] = useState<Spot | null>(null);
   const [placeInfos, setPlaceInfos] = useState<PlaceInfos | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -78,12 +73,10 @@ export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) =>
     );
   }
   return (
-    <TouchableOpacity
-      onPress={() => navigate(`/spot/${spotId}`)}
-      style={style('w-full max-w-[80vw] mr-6')}>
+    <TouchableOpacity onPress={() => navigate(`/spot/${spotId}`)} style={style('max-w-[95%]')}>
       <View
         style={style(
-          'flex w-full flex-col max-w-[80vw] p-2 bg-white rounded-lg items-center',
+          'flex w-full flex-col max-w-[100%] mx-auto p-2 bg-white rounded-lg items-center my-2',
           classes?.container
         )}>
         <View style={style('w-full overflow-hidden relative')}>
@@ -97,7 +90,7 @@ export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) =>
             style={style(
               'absolute top-[-2] right-[-2] w-10 h-10 bg-white p-2 rounded-full flex items-center justify-center'
             )}>
-            <SvgHeart classes='max-w-6 max-h-4' fill={Palette.gray[100]} />
+            <SvgHeart classes='max-w-6 max-h-4' fill={Palette.primary[300]} />
           </View>
           <View style={style('flex flex-row justify-between items-center mt-2')}>
             <View
@@ -122,17 +115,7 @@ export const SpotCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) =>
               ))}
             </View>
           </View>
-          <View style={style('flex flex-row justify-between items-center mt-2')}>
-            <AppText style={style('text-sm font-700')}>{spot?.ranking} / 5</AppText>
-          </View>
           <AppText style={style('text-lg font-600 mt-2')}>{spot?.details.name}</AppText>
-          <AppText
-            numberOfLines={3}
-            ellipsizeMode='tail'
-            adjustsFontSizeToFit={false}
-            style={style('text-sm flex-1 text-gray-400 mt-1')}>
-            {spot?.details.description}
-          </AppText>
         </View>
       </View>
     </TouchableOpacity>
