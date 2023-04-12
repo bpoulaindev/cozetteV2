@@ -1,4 +1,3 @@
-import { getPlaceInformations } from '../../../actions/places';
 import React, { useEffect, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import tw from '../../../../lib/tailwind';

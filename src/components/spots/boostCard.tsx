@@ -3,17 +3,12 @@ import { Image, TouchableOpacity, View } from 'react-native';
 import { Spot } from '../../../types/spots';
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppText } from '../appText';
-import { SvgPizza } from '../../../assets/svg_components/icons/food/svg_pizza';
-import { SvgDining } from '../../../assets/svg_components/icons/food/svg_dining';
-import { SvgRamen } from '../../../assets/svg_components/icons/food/svg_ramen';
-import { SvgBurger } from '../../../assets/svg_components/icons/food/svg_burger';
 import { SvgHeart } from '../../../assets/svg_components/icons/svg_heart';
 import { Palette } from '../../../lib/palette';
 import { getSpot } from '../../actions/spots';
 import { t } from 'i18next';
 import { SpotIcon } from './spot_icon';
-import { getPlaceInformations } from '../../actions/maps';
-import { ArrowPathIcon } from 'react-native-heroicons/solid';
+import { getPlaceInformations } from '../../actions/places';
 import { useNavigate } from 'react-router-dom';
 
 const { style } = tw;
@@ -78,9 +73,7 @@ export const BoostCard: React.FC<SpotCardProps> = ({ spotId, index, classes }) =
     );
   }
   return (
-    <TouchableOpacity
-      onPress={() => navigate(`/spot/${spotId}`)}
-      style={style('max-w-[95%]')}>
+    <TouchableOpacity onPress={() => navigate(`/spot/${spotId}`)} style={style('max-w-[95%]')}>
       <View
         style={style(
           'flex w-full flex-col max-w-[100%] mx-auto p-2 bg-white rounded-lg items-center my-2',

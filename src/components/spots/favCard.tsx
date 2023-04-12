@@ -12,7 +12,7 @@ import { Palette } from '../../../lib/palette';
 import { getSpot } from '../../actions/spots';
 import { t } from 'i18next';
 import { SpotIcon } from './spot_icon';
-import { getPlaceInformations } from '../../actions/maps';
+import { getPlaceInformations } from '../../actions/places';
 import { ArrowPathIcon } from 'react-native-heroicons/solid';
 import { useNavigate } from 'react-router-dom';
 

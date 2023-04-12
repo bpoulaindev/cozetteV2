@@ -1,4 +1,4 @@
-import { Dimensions, ScrollView, View,SafeAreaView } from 'react-native';
+import { Dimensions, ScrollView, View, SafeAreaView } from 'react-native';
 import tw from '../../../lib/tailwind';
 import { AppText } from '../appText';
 import { FavCard } from '../spots/favCard';
@@ -26,13 +26,9 @@ export const Favories = () => {
   return (
     <SafeAreaView style={style(' w-full')}>
       <View style={style('w-full flex flex-col mt-10 ml-4')}>
-        <View style={style('flex flex-row align-content-center  justify-between w-95')}>
-        <AppText style={style('text-2xl font-600 ')}>
-          Vos coups de coeur
-        </AppText>
-        <AppText style={style('text-sm font-600 inline-block align-middle')}>
-          Voir tout
-        </AppText>
+        <View style={style('flex flex-row items-center justify-between w-95')}>
+          <AppText style={style('text-2xl font-600 ')}>Vos coups de coeur</AppText>
+          <AppText style={style('text-sm font-600')}>Voir tout</AppText>
         </View>
         <ScrollView
           style={style(`flex flex-row mt-6 w-full grow`)}
@@ -49,13 +45,12 @@ export const Favories = () => {
               key={index}
               spotId={spotId}
               classes={{
-                container: 'mr-4',
+                container: 'mr-4'
               }}
             />
           ))}
         </ScrollView>
       </View>
     </SafeAreaView>
-
   );
 };

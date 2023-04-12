@@ -24,32 +24,24 @@ export const BoostCaps = () => {
   );
   return (
     <SafeAreaView style={style('w-full bg-success-300')}>
-    <View style={style('w-full flex flex-col mt-10 ml-4  mb-5')}>
-       <AppText style={style('text-2xl font-600 ')}>
-        Les Boost tes 
-      </AppText>
-      <View style={style('flex flex-row align-content-center  justify-between w-95')}>
-        <AppText style={style('text-2xl font-600 ')}>
-          cap`
-        </AppText>
-        <AppText style={style('text-sm font-600 inline-block align-middle')}>
-          Voir tout
-        </AppText>
+      <View style={style('w-full flex flex-col mt-10 ml-4  mb-5')}>
+        <AppText style={style('text-2xl font-600 ')}>Les Boost tes</AppText>
+        <View style={style('flex flex-row items-center justify-between w-95')}>
+          <AppText style={style('text-2xl font-600 ')}>cap`</AppText>
+          <AppText style={style('text-sm font-600')}>Voir tout</AppText>
+        </View>
+        <ScrollView style={style(``)}>
+          {Object.values(spots || {}).map((spotId, index) => (
+            <BoostCard
+              key={index}
+              spotId={spotId}
+              classes={{
+                container: 'mr-4'
+              }}
+            />
+          ))}
+        </ScrollView>
       </View>
-      <ScrollView
-        style={style(``)}>
-        {Object.values(spots || {}).map((spotId, index) => (
-          <BoostCard
-            key={index}
-            spotId={spotId}
-            classes={{
-              container: 'mr-4',
-            }}
-          />
-        ))}
-      </ScrollView>
-    </View>
-  </SafeAreaView>
-
+    </SafeAreaView>
   );
 };

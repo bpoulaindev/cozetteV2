@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { AppText } from '../../components/appText';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getPlaceInformations, getPlaceReviews } from '../../actions/places';
+import { getPlaceReviews } from '../../actions/places';
 import { google } from 'google-maps';
 import { StarIcon } from 'react-native-heroicons/solid';
 import { Trans } from 'react-i18next';
