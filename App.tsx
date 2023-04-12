@@ -2,6 +2,7 @@ import { NativeRouter, Route } from 'react-router-native';
 import { Homepage } from './src/screens/homepage/homepage';
 import { Maps } from './src/screens/maps/maps';
 import { Navbar } from './src/components/navbar';
+import { SearchPage } from './src/screens/homepage/search/searchpage';
 import { Navigate, Routes } from 'react-router-dom';
 import { StatusBar } from 'expo-status-bar';
 import { AuthContext, AuthProvider } from './src/screens/auth/auth_context';
@@ -70,7 +71,7 @@ export default function App() {
           {userLoggedIn && (
             <>
               <Route path='/journeys' element={<Homepage />} />
-              <Route path='/search' element={<Homepage />} />
+              <Route path='/search' element={<SearchPage />} />
               <Route path='/profile' element={<Homepage />} />
               <Route path='/maps' element={<Maps />} />
               <Route path='/spot/:id' element={<SpotPage />} />

@@ -39,7 +39,7 @@ export const createUser = async (
   changeUser: (user: CztUser | null) => void
 ) => {
   console.log('minimal user received', user);
-  return fetch('http://10.43.128.154:3333/me', {
+  return fetch('http://http://192.168.110.20:3333/me', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
