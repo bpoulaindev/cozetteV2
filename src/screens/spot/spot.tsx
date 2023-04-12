@@ -16,7 +16,7 @@ import { SvgFamily } from '../../../assets/svg_components/icons/activity/svg_fam
 import { SvgSofa } from '../../../assets/svg_components/icons/activity/svg_sofa';
 import { OpeningTime } from './opening_time/opening_time';
 import { SpotLocation } from './spot_location/spot_location';
-import { getPlaceInformations } from '../../actions/maps';
+import { getPlaceInformations } from '../../actions/places';
 import { google } from 'google-maps';
 import { SpotReviews } from './spot_reviews/spot_reviews';
 
@@ -121,7 +121,7 @@ export const SpotPage = () => {
             style={style(
               'absolute top-5 left-4 w-10 h-10 bg-white p-2 rounded-full flex items-center justify-center'
             )}
-            onPress={() => navigate('/')}>
+            onPress={() => navigate(-1)}>
             <SvgArrowLeft classes='max-w-6 max-h-4' fill={Palette.gray[100]} />
           </Pressable>
           <Pressable

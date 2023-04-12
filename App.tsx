@@ -6,7 +6,7 @@ import { SearchPage } from './src/screens/homepage/search/searchpage';
 import { Navigate, Routes } from 'react-router-dom';
 import { StatusBar } from 'expo-status-bar';
 import { AuthContext, AuthProvider } from './src/screens/auth/auth_context';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Register } from './src/screens/auth/register/register';
 // @ts-ignore
 import { API_KEY } from '@env';
@@ -17,6 +17,7 @@ import { useDeviceContext } from 'twrnc';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SpotPage } from './src/screens/spot/spot';
+import { SpotReviewsPage } from './src/screens/reviews/spot_reviews_page';
 
 export default function App() {
   const { isLoggedIn, login, logout, changeUser, user } = useContext(AuthContext);
@@ -75,6 +76,7 @@ export default function App() {
               <Route path='/profile' element={<Homepage />} />
               <Route path='/maps' element={<Maps />} />
               <Route path='/spot/:id' element={<SpotPage />} />
+              <Route path='/reviews/:placeId' element={<SpotReviewsPage />} />
             </>
           )}
         </Routes>
