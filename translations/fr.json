@@ -28,5 +28,6 @@
   "Main.next": "Suivant",
   "Main.bar": "Bar",
   "Main.restaurant": "Restaurant",
-  "Main.activity": "Activité"
+  "Main.activity": "Activité",
+  "Spot.reviews.title": "Critiques et évaluations <0>({{count}})</0>"
 }
